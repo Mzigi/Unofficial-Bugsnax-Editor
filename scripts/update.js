@@ -120,9 +120,9 @@ function refreshAttributes() {
         input.setAttribute("type", "number")
         input.setAttribute("step", "0.000000001")
       } else if (keyType === "expression") {
-        input.setAttribute("placeholder", "example: @#Cake,Player,102")
+        input.setAttribute("placeholder", "@#Cake,Player,102")
       } else if (keyType === "path") {
-        input.setAttribute("placeholder", "example: Content/Models/Bugs/Apple/Apple.x")
+        input.setAttribute("placeholder", "Content/Models/Bugs/Apple/Apple.x")
       } else {
         input.setAttribute("placeholder", keyType)
       }
