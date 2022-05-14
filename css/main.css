@@ -1,0 +1,250 @@
+header {
+    margin: 0;
+}
+
+body {
+    margin:0;
+}
+
+#content {
+    display: table;
+}
+
+#FileMenu {
+    background-color: #F1F1F1;
+    margin-bottom: 5px;
+}
+
+#FileMenu button {
+    height: 5%;
+    border-radius: 0;
+    border-style: none;
+    background-color: #F1F1F1;
+    font-size: large;
+}
+
+#FileMenu input[type="file"] {
+    display: none;
+}
+
+.labelForFileInput {
+    padding: 5px;
+    margin-right: 5px;
+    margin-left: 5px;
+    height: 5%;
+    border-radius: 0;
+    border-style: none;
+    background-color: #F1F1F1;
+    font-size: large;
+}
+
+.FileMenu-List-Main {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#SceneTree {
+    min-height: 88%;
+    max-width: 270px;
+    width: 270px;
+    background-color: #ffffffd5;
+    float:left;
+    overflow: inherit;
+}
+
+#Properties {
+    min-height: 88%;
+    max-width: 270px;
+    width: 270px;
+    background-color: #ffffffd5;
+    float:left;
+    margin-left: 4px;
+}
+
+#Properties .property {
+    display:table;
+}
+
+#Properties .propertyName {
+    display:table-cell;
+    width: 135px;
+}
+
+#Properties .propertyValue {
+    display:table-cell;
+    width: 135px;
+}
+
+.SceneTreeTop {
+    min-height: 5%
+}
+
+.PropertiesTop {
+    min-height: 5%
+}
+
+.SceneTreeTopTitle {
+    min-height: 35%;
+    background-color: #D4E1EF;
+}
+
+.PropertiesTopTitle {
+    min-height: 35%;
+    background-color: #D4E1EF;
+}
+
+.SceneTreeTopButtons {
+    min-height: 65%;
+    background-color: #F0F0F0;
+}
+
+.PropertiesTopButtons {
+    min-height: 65%;
+    background-color: #F0F0F0;
+}
+
+ul, #SceneTreeList {
+    list-style-type: none;
+}
+
+#SceneTreeList {
+    margin: 0;
+    padding-right: 3px;
+    overflow: auto;
+    max-height: 88%;
+    height: 800px;
+    min-height: 88%;
+    resize: vertical;
+    padding-inline-start: 0;
+}
+
+#Attributes {
+    margin: 0;
+    padding-right: 3px;
+    overflow: auto;
+    max-height: 88%;
+    height: 800px;
+    min-height: 88%;
+    resize: vertical;
+    padding-inline-start: 0;
+    background-color: #F1F1F1;
+}
+
+#Materials {
+    margin: 0;
+    padding-right: 3px;
+    overflow: auto;
+    max-height: 88%;
+    height: 800px;
+    min-height: 88%;
+    resize: vertical;
+    padding-inline-start: 0;
+    background-color: #F1F1F1;
+}
+
+#Animators {
+    margin: 0;
+    padding-right: 3px;
+    overflow: auto;
+    max-height: 88%;
+    height: 800px;
+    min-height: 88%;
+    resize: vertical;
+    padding-inline-start: 0;
+    background-color: #F1F1F1;
+}
+
+.SceneTreeDiv {
+    overflow:inherit;
+    width: 270px;
+    height: 88%;
+    background-color: #F1F1F1;
+}
+
+.Attributes {
+    overflow: auto;
+    height: 88%;
+    background-color: #F1F1F1;
+}
+
+.Materials {
+    overflow: auto;
+    height: 88%;
+    background-color: #F1F1F1;
+}
+
+.Animators {
+    overflow: auto;
+    height: 88%;
+    background-color: #F1F1F1;
+}
+
+#SceneTreeList li {
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+    background-color: #F1F1F1;
+}
+
+.caret {
+    cursor: pointer;
+    user-select: none;
+}
+
+.caret::before {
+    color: black;
+    display: inline-block;
+    margin-right: 6px;
+}
+
+.caretButton {
+    border-radius: 0px;
+    padding-right: 4px;
+    padding-left: 4px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    margin: 2px;
+    cursor: pointer;
+}
+
+.nested {
+    display: none;
+}
+
+.active {
+    display: block;
+}
+
+.selectedLi {
+    background-color: #b8c5d3 !important;
+}
+
+[draggable] {
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    /* Required to make elements draggable in old WebKit */
+    -khtml-user-drag: element;
+    -webkit-user-drag: element;
+}
+
+#FileMenu .dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+#FileMenu .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 2px 4px;
+    z-index: 1;
+}
+
+#FileMenu .dropdown-content-opened {
+    display: block;
+}

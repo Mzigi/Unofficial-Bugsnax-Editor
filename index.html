@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <title>Unofficial Bugsnax Editor</title>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/main.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <div id="FileMenu">
+      <div class="dropdown" id="dropdown-File"><button class="FileMenu" id="FileMenu-File">File</button>
+        <div class="dropdown-content">
+          <ul class="FileMenu-List-Main">
+            <li class="FileMenu-List"><label for="FileMenu-Open" class="labelForFileInput">Open</label><input id="FileMenu-Open" type="file" multiple></li>
+            <li class="FileMenu-List"><button id="FileMenu-SaveAs">Save As</button></li>
+            <li class="FileMenu-List"><button id="FileMenu-PropertyInfo">Save Property Info</button></li>
+          </ul>
+        </div>
+      </div>
+      <div class="dropdown"><button class="FileMenu" id="FileMenu-Edit">Edit</button>
+        <div class="dropdown-content">
+          
+        </div>
+      </div>
+    </div>
+
+    <div id="SceneTree">
+      <div class="SceneTreeTop">
+        <div class="SceneTreeTopTitle">
+          Scene Tree
+        </div>
+        <div class="SceneTreeTopButtons">
+          
+        </div>
+      </div>
+      <div class="SceneTreeDiv">
+        <ul id="SceneTreeList">
+          
+        </ul>
+      </div>
+    </div>
+
+    <div id="Properties">
+      <div class="PropertiesTop">
+        <div class="PropertiesTopTitle">
+          Properties
+        </div>
+        <div class="PropertiesTopButtons">
+          
+        </div>
+      </div>
+      <div id="Attributes">
+        <div class="property">
+          <div class="propertyName">
+            Hunger
+          </div>
+          <div class="propertyValue">
+              <input type="text">
+          </div>
+        </div>
+        <div class="property">
+          <div class="propertyName">
+            Food
+          </div>
+          <div class="propertyValue">
+              <input type="text">
+          </div>
+        </div>
+      </div>
+      <div id="Materials" hidden>
+
+      </div>
+      <div id="Animators" hidden>
+
+      </div>
+      <div id="PropertyDescription">
+
+      </div>
+      <div id="PropertyCategorySelector">
+
+      </div>
+    </div>
+
+    
+    <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
+    <script src="libraries/jquery-3.6.0.min.js"></script>
+    <script src="scripts/update.js"></script>
+  </body>
+</html>
