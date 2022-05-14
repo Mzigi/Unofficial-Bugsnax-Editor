@@ -403,8 +403,24 @@ function createVisualizedNode(xmlPath, elementParent2) {
 
   li.appendChild(span)
 
+  span.addEventListener("ondragover",function(e) {
+    e.preventDefault()
+  })
+
+  span.addEventListener("ondragstart",function(e) {
+    e.dataTransfer.setData("text", e.getAttribute("data-internalid"))
+  })
+  
+  span.addEventListener("ondrop",function(e) {
+    e.preventDefault()
+    let dataInternalId = e.dataTransfer.getData("text")
+    e.target.appendChild(document.querySelector('li[data-internalid="' + dataInternalId + '"]'))
+  })
+
   span.addEventListener("click", function(e) {
+    console.log("click!")
     if (keysPressed["ControlLeft"] === false && keysPressed["ControlRight"] === false && keysPressed["ShiftLeft"] === false) {
+      console.log("remove selection")
       for (let i = 0; i < selectedLiElements.length; i++) {
         selectedLiElements[i].querySelector(":scope > span").classList.remove("selectedLi")
       }
@@ -473,9 +489,11 @@ function createVisualizedNode(xmlPath, elementParent2) {
     }*/
 
     if (span.classList.contains("selectedLi")) {
+      console.log("remove selection")
       span.classList.remove("selectedLi")
       selectedLiElements.splice(selectedLiElements.indexOf(span.parentElement),1)
     } else {
+      console.log("add selection")
       span.classList.add("selectedLi")
       selectedLiElements.push(span.parentElement)
     }
@@ -555,7 +573,7 @@ function fileMenuButtons() {
   }
 }
 
-window.addEventListener('click', function(e){   
+/*document.body.addEventListener('click', function(e){   
   for (let i = 0; i < selectedLiElements.length; i++) {
     selectedLiElements[i].querySelector(":scope > span").classList.remove("selectedLi")
   }
@@ -563,7 +581,7 @@ window.addEventListener('click', function(e){
   if (!document.getElementById('dropdown-File').contains(e.target) && document.getElementById('dropdown-File').querySelector(".dropdown-content").classList.contains("dropdown-content-opened")){
     document.getElementById('dropdown-File').querySelector(".dropdown-content").classList.toggle("dropdown-content-opened");
   }
-});
+});*/
 
 function loadNewFile() {
   if (currentFileIndex < files.length) {
