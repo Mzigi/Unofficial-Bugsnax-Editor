@@ -117,6 +117,13 @@ function refreshAttributes() {
         }
       } else if (keyType === "color") {
         input.setAttribute("type", "color")
+
+        let alpha = document.createElement("input")
+        alpha.setAttribute("type","color")
+        alpha.setAttribute("min","0")
+        alpha.setAttribute("max","1")
+        alpha.setAttribute("step","0.01")
+        alpha.setAttribute("placeholder", "alpha")
       } else if (keyType === "float") {
         input.setAttribute("type", "number")
         input.setAttribute("step", "0.000000001")
@@ -128,6 +135,13 @@ function refreshAttributes() {
         input.setAttribute("value","0.0, 0.0, 0.0")
       } else if (keyType === "colorf") {
         input.setAttribute("type", "color")
+
+        let alpha = document.createElement("input")
+        alpha.setAttribute("type","color")
+        alpha.setAttribute("min","0")
+        alpha.setAttribute("max","1")
+        alpha.setAttribute("step","0.01")
+        alpha.setAttribute("placeholder", "alpha")
       } else {
         input.setAttribute("placeholder", keyType)
       }
@@ -136,7 +150,7 @@ function refreshAttributes() {
       if (selectedNodeElement.querySelector(":scope > attributes")) {
         if (selectedNodeElement.querySelector(keyType + '[name="' + key + '"]')) {
           console.log("success! " + keyType + '[name="' + key + '"]')
-          if (keyType !== "enum") {
+          if (keyType !== "enum" && keyType !== "color" && keyType !== "colorf") {
             console.log("final")
             input.setAttribute("value",selectedNodeElement.querySelector(keyType + '[name="' + key + '"]').getAttribute("value"))
           }
