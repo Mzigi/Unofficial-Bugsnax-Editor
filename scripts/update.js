@@ -25,7 +25,7 @@ var PropertiesInfoExample = {
 var PropertiesInfo = {}
 var RealPropertiesInfo = {}
 
-fetch("jscontent/RealPropertiesInfo.json")
+fetch("https://mzigi.github.io/Unofficial-Bugsnax-Editor/jscontent/RealPropertiesInfo.json")
 .then(response => {
    return response.json();
 })
@@ -71,6 +71,7 @@ function download(filename, text) {
 
 function refreshAttributes() {
   if (selectedLiElements.length === 1) {
+    selectedNodeElement = irrGetNodeAtPath(selectedLiElements[0].getAttribute("data-internalid"))
     selectedLiElementType = irrGetNodeAtPath(selectedLiElements[0].getAttribute("data-internalid")).getAttribute("type")
 
     let AllProperties = RealPropertiesInfo[selectedLiElementType]
@@ -120,13 +121,31 @@ function refreshAttributes() {
         input.setAttribute("type", "number")
         input.setAttribute("step", "0.000000001")
       } else if (keyType === "expression") {
-        input.setAttribute("placeholder", "@#Cake,Player,102")
+        input.setAttribute("placeholder", "@#Cake,Player,!102")
       } else if (keyType === "path") {
         input.setAttribute("placeholder", "Content/Models/Bugs/Apple/Apple.x")
+      } else if (keyType === "vector3") {
+        input.setAttribute("value","0.0, 0.0, 0.0")
+      } else if (keyType === "colorf") {
+        input.setAttribute("type", "color")
       } else {
         input.setAttribute("placeholder", keyType)
       }
       propertyValue.appendChild(input)
+
+      if (selectedNodeElement.querySelector(":scope > attributes")) {
+        if (selectedNodeElement.querySelector(keyType + '[name="' + key + '"]')) {
+          console.log("success! " + keyType + '[name="' + key + '"]')
+          if (keyType !== "enum") {
+            console.log("final")
+            input.setAttribute("value",selectedNodeElement.querySelector(keyType + '[name="' + key + '"]').getAttribute("value"))
+          }
+        } else {
+          console.log(keyType + '[name="' + key + '"]')
+        }
+      } else {
+        console.log("HUH?")
+      }
 
       document.getElementById("Attributes").appendChild(property)
     })
@@ -378,7 +397,7 @@ function createVisualizedNode(xmlPath, elementParent2) {
       selectedLiElements = []
     }
     
-    if (keysPressed["ShiftLeft"] === true && false === true) {
+    /*if (keysPressed["ShiftLeft"] === true && false === true) {
       if (!span.classList.contains("selectedLi")) {
         span.classList.add("selectedLi")
         selectedLiElements.push(span.parentElement)
@@ -437,14 +456,14 @@ function createVisualizedNode(xmlPath, elementParent2) {
         }
 
       }
-    }
+    }*/
 
-    if (!span.classList.contains("selectedLi")) {
-      span.classList.add("selectedLi")
-      selectedLiElements.push(span.parentElement)
-    } else {
+    if (span.classList.contains("selectedLi")) {
       span.classList.remove("selectedLi")
       selectedLiElements.splice(selectedLiElements.indexOf(span.parentElement),1)
+    } else {
+      span.classList.add("selectedLi")
+      selectedLiElements.push(span.parentElement)
     }
     refreshProperties()
   })
