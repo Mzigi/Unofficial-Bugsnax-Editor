@@ -348,9 +348,13 @@ function createVisualizedNode(xmlPath, elementParent2) {
 
   for (let b = 0; b < nodeAttributes.length; b++) {
     if (PropertiesInfo[nodeType][nodeAttributes[b].getAttribute("name")] === undefined) {
-      if (!nodeType === "TriggerObject" && !nodeType === "TriggerEventObject") {
+      if (!nodeType === "TriggerObject" && !nodeType === "TriggerEventObject" && !nodeType === "ConditionalTrigger") {
         PropertiesInfo[nodeType][nodeAttributes[b].getAttribute("name")] = {type:nodeAttributes[b].nodeName, values:[]}
       } else if (nodeType === "TriggerObject") {
+        PropertiesInfo[nodeType][nodeAttributes[b].getAttribute("name")] = {type:nodeAttributes[b].nodeName, values:[], presentWhenCondition:[], presentWhenOnTrigger:[]}
+      } else if (nodeType === "TriggerEventObject") {
+        PropertiesInfo[nodeType][nodeAttributes[b].getAttribute("name")] = {type:nodeAttributes[b].nodeName, values:[], presentWhenOnTrigger:[]}
+      } else if (nodeType === "ConditionalTrigger") {
         PropertiesInfo[nodeType][nodeAttributes[b].getAttribute("name")] = {type:nodeAttributes[b].nodeName, values:[], presentWhenCondition:[], presentWhenOnTrigger:[]}
       } else {
         PropertiesInfo[nodeType][nodeAttributes[b].getAttribute("name")] = {type:nodeAttributes[b].nodeName, values:[]}
@@ -371,7 +375,41 @@ function createVisualizedNode(xmlPath, elementParent2) {
     console.log("trigger objecting")
     if (nodeType === "TriggerObject") {
       if (!["Name","Position","Rotation","Scale","Visible","TriggerStartExpression","TriggerCondition","OnTriggerEvent","OnceCondMetAlways"].includes(nodeAttributes[b].getAttribute("name"))) {
-        
+        if (PropertiesInfo[nodeType][nodeAttributes[b].getAttribute("name")]["presentWhenCondition"] !== undefined) { //TRIGGER CONDITION
+          if (!PropertiesInfo[nodeType][nodeAttributes[b].getAttribute("name")]["presentWhenCondition"].includes(LastTriggerConditionValue)) {
+            PropertiesInfo[nodeType][nodeAttributes[b].getAttribute("name")]["presentWhenCondition"].push(LastTriggerConditionValue)
+          }
+          if (PropertiesInfo[nodeType][nodeAttributes[b].getAttribute("name")]["presentWhenCondition"].length > 1) {
+            PropertiesInfo[nodeType][nodeAttributes[b].getAttribute("name")]["presentWhenCondition"] = undefined
+          }
+        }
+
+        if (PropertiesInfo[nodeType][nodeAttributes[b].getAttribute("name")]["presentWhenOnTrigger"] !== undefined) { //TRIGGER EVENT
+          if (!PropertiesInfo[nodeType][nodeAttributes[b].getAttribute("name")]["presentWhenOnTrigger"].includes(LastOnTriggerEventValue)) {
+            PropertiesInfo[nodeType][nodeAttributes[b].getAttribute("name")]["presentWhenOnTrigger"].push(LastOnTriggerEventValue)
+          }
+
+          if (PropertiesInfo[nodeType][nodeAttributes[b].getAttribute("name")]["presentWhenOnTrigger"].length > 1) {
+            PropertiesInfo[nodeType][nodeAttributes[b].getAttribute("name")]["presentWhenOnTrigger"] = undefined
+          }
+        } 
+      }
+    }
+    if (nodeType === "TriggerEventObject") {
+      if (!["Name","OnTriggerEvent"].includes(nodeAttributes[b].getAttribute("name"))) {
+        if (PropertiesInfo[nodeType][nodeAttributes[b].getAttribute("name")]["presentWhenOnTrigger"] !== undefined) { //TRIGGER EVENT
+          if (!PropertiesInfo[nodeType][nodeAttributes[b].getAttribute("name")]["presentWhenOnTrigger"].includes(LastOnTriggerEventValue)) {
+            PropertiesInfo[nodeType][nodeAttributes[b].getAttribute("name")]["presentWhenOnTrigger"].push(LastOnTriggerEventValue)
+          }
+
+          if (PropertiesInfo[nodeType][nodeAttributes[b].getAttribute("name")]["presentWhenOnTrigger"].length > 1) {
+            PropertiesInfo[nodeType][nodeAttributes[b].getAttribute("name")]["presentWhenOnTrigger"] = undefined
+          }
+        } 
+      }
+    }
+    if (nodeType === "ConditionalTrigger") {
+      if (!["Name","Position","Rotation","Scale","Visible","TriggerStartExpression","TriggerCondition","OnTriggerEvent","OnceCondMetAlways","TimeSpan","BreakIfTrue","Randomness"].includes(nodeAttributes[b].getAttribute("name"))) {
         if (PropertiesInfo[nodeType][nodeAttributes[b].getAttribute("name")]["presentWhenCondition"] !== undefined) { //TRIGGER CONDITION
           if (!PropertiesInfo[nodeType][nodeAttributes[b].getAttribute("name")]["presentWhenCondition"].includes(LastTriggerConditionValue)) {
             PropertiesInfo[nodeType][nodeAttributes[b].getAttribute("name")]["presentWhenCondition"].push(LastTriggerConditionValue)
