@@ -144,6 +144,8 @@ function refreshAttributes() {
 
         let keyType = AllProperties[key]["type"]
 
+        console.log("keyType is " + keyType)
+
         let property = document.createElement("div")
         property.classList.add("property")
 
@@ -155,6 +157,8 @@ function refreshAttributes() {
         let propertyValue = document.createElement("div")
         propertyValue.classList.add("propertyValue")
         property.appendChild(propertyValue)
+
+        let alpha = null
 
         let input = document.createElement("input")
         if (keyType === "int") {
@@ -181,7 +185,7 @@ function refreshAttributes() {
         } else if (keyType === "color") {
           input.setAttribute("type", "color")
 
-          let alpha = document.createElement("input")
+          alpha = document.createElement("input")
           alpha.setAttribute("type","color")
           alpha.setAttribute("min","0")
           alpha.setAttribute("max","1")
@@ -199,7 +203,7 @@ function refreshAttributes() {
         } else if (keyType === "colorf") {
           input.setAttribute("type", "color")
 
-          let alpha = document.createElement("input")
+          alpha = document.createElement("input")
           alpha.setAttribute("type","color")
           alpha.setAttribute("min","0")
           alpha.setAttribute("max","1")
@@ -209,6 +213,9 @@ function refreshAttributes() {
           input.setAttribute("placeholder", keyType)
         }
         propertyValue.appendChild(input)
+        if (alpha !== null && alpha !== undefined) {
+          propertyValue.appendChild(alpha)
+        }
 
         if (selectedNodeElement.querySelector(":scope > attributes")) {
           if (selectedNodeElement.querySelector(keyType + '[name="' + key + '"]')) {
@@ -219,7 +226,8 @@ function refreshAttributes() {
             } else if (keyType === "enum") {
               input.value = selectedNodeElement.querySelector(keyType + '[name="' + key + '"]').getAttribute("value")
             } else if (keyType === "color") {
-              
+              console.log("AAAAAAAAAAAAAAAA: " + selectedNodeElement.querySelector(keyType + '[name="' + key + '"]').getAttribute("value").splice(0,7))
+              input.setAttribute("value",selectedNodeElement.querySelector(keyType + '[name="' + key + '"]').getAttribute("value").splice(0,7))
             }
           } else {
             console.log(keyType + '[name="' + key + '"]')
