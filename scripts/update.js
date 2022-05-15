@@ -28,12 +28,19 @@ var PropertiesInfoExample = {
 var PropertiesInfo = {}
 var RealPropertiesInfo = {}
 
+var DefaultLevel = ""
+
 fetch("https://mzigi.github.io/Unofficial-Bugsnax-Editor/jscontent/RealPropertiesInfo.json")
 .then(response => {
    return response.json();
 })
 .then(temporar => RealPropertiesInfo = temporar);
 
+fetch("https://mzigi.github.io/Unofficial-Bugsnax-Editor/jscontent/DefaultLevel.irr")
+.then(response => {
+   return response
+})
+.then(temporar => DefaultLevel = temporar);
 
 var childrenNotAdded = []
 
@@ -186,10 +193,10 @@ function refreshAttributes() {
           input.setAttribute("type", "color")
 
           alpha = document.createElement("input")
-          alpha.setAttribute("type","color")
-          alpha.setAttribute("min","0")
-          alpha.setAttribute("max","1")
-          alpha.setAttribute("step","0.01")
+          alpha.setAttribute("type","number")
+          alpha.setAttribute("min","1")
+          alpha.setAttribute("max","255")
+          alpha.setAttribute("step","1")
           alpha.setAttribute("placeholder", "alpha")
         } else if (keyType === "float") {
           input.setAttribute("type", "number")
@@ -204,10 +211,10 @@ function refreshAttributes() {
           input.setAttribute("type", "color")
 
           alpha = document.createElement("input")
-          alpha.setAttribute("type","color")
-          alpha.setAttribute("min","0")
-          alpha.setAttribute("max","1")
-          alpha.setAttribute("step","0.01")
+          alpha.setAttribute("type","number")
+          alpha.setAttribute("min","1")
+          alpha.setAttribute("max","255")
+          alpha.setAttribute("step","1")
           alpha.setAttribute("placeholder", "alpha")
         } else {
           input.setAttribute("placeholder", keyType)
@@ -725,6 +732,12 @@ document.getElementById("FileMenu-Open").addEventListener("change", function(e){
 document.getElementById("FileMenu-SaveAs").addEventListener("click", function(e){
   download("NewLevel.irr",new XMLSerializer().serializeToString(currentIrr))
 })
+
+document.getElementById("FileMenu-New").addEventListener("click", function(e){
+  currentIrr = parser.parseFromString(DefaultLevel,"text/xml");
+  refreshStructure()
+})
+
 
 document.getElementById("FileMenu-PropertyInfo").addEventListener("click", function(e){
   download("PropertiesInfo.json", JSON.stringify(PropertiesInfo))

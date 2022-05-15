@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<irr_scene>
+	<attributes>
+		<string name="Name" value="root" />
+		<int name="Id" value="-1" />
+		<colorf name="AmbientLight" value="0.862700, 0.874500, 0.894100, 0.000000" />
+		<enum name="FogType" value="" />
+		<colorf name="FogColor" value="0.462745, 0.549020, 0.721569, 0.062745" />
+		<float name="FogStart" value="0.000000" />
+		<float name="FogEnd" value="0.000000" />
+		<float name="FogDensity" value="0.000100" />
+		<bool name="FogPixel" value="false" />
+		<bool name="FogRange" value="false" />
+	</attributes>
+	
+	<node type="ClassObject">
+		<attributes>
+			<string name="Name" value="TimeManager" />
+			<int name="Id" value="1001" />
+			<vector3d name="Position" value="0.000000, 0.000000, 0.000000" />
+			<vector3d name="Rotation" value="0.000000, 0.000000, 0.000000" />
+			<vector3d name="Scale" value="1.000000, 1.000000, 1.000000" />
+			<string name="Tags" value="ToolManager" />
+			<bool name="Visible" value="true" />
+			<path name="SubLevelFileName" value="Content/Levels/TimeManager.irr" />
+			<bool name="HasRenderables" value="true" />
+			<bool name="ClassCollision" value="true" />
+			<expression name="RemoveTempJointsTagged" value="" />
+			<expression name="TempJointObjects" value="" />
+			<string name="TempJointTags" value="" />
+			<path name="DefinitionOverridePath" value="" />
+			<int name="VariableOverrideCount" value="1" />
+			<int name="AttributeOverrideCount" value="1" />
+		</attributes>
+
+	</node>
+	
+	<node type="light">
+		<attributes>
+			<vector3d name="Position" value="0, 10, 0" />
+			<vector3d name="Rotation" value="0.000000, 0.000000, 0.000000" />
+			<vector3d name="Scale" value="1.000000, 1.000000, 1.000000" />
+			<bool name="Visible" value="false" />
+			<bool name="VisibleInSublevelOnly" value="false" />
+			<enum name="LightType" value="Point" />
+			<colorf name="DiffuseColor" value="0.352900, 0.423500, 0.447100, 1.000000" />
+			<vector3d name="Attenuation" value="0.500000, 0.008000, 0.000000" />
+			<float name="Radius" value="125.000000" />
+			<float name="OuterCone" value="45.000000" />
+			<float name="InnerCone" value="0.000000" />
+			<float name="Falloff" value="1.000000" />
+			<expression name="StartExpression" value="" />
+			<bool name="HighPriority" value="false" />
+			<float name="CullDistance" value="0.000000" />
+			<bool name="AllowInMultipass" value="true" />
+			<bool name="AllowBackLighting" value="true" />
+			<bool name="NightOnly" value="false" />
+		</attributes>
+
+	</node>
+	
+	<node type="PhysicsObject">
+		<attributes>
+			<vector3d name="Position" value="0.000000, 5.000000, 0.000000" />
+			<vector3d name="Rotation" value="0.000000, 0.000000, 0.000000" />
+			<vector3d name="Scale" value="50.000000, 1.000000, 50.000000" />
+			<string name="Tags" value="Nav" />
+			<bool name="Visible" value="true" />
+			<path name="MeshFileName" value="Content/Models/Editor/Box.obj" />
+			<enum name="BoundType" value="Box" />
+			<float name="Height" value="15.000000" />
+			<float name="Radius" value="2.000000" />
+			<enum name="PhysicsState" value="Static" />
+			<float name="Mass" value="10.000000" />
+			<float name="Friction" value="0.500000" />
+			<bool name="CollideOnlyTriggers" value="false" />
+			<bool name="IgnoreRaycastCollision" value="true" />
+			<color name="OutlineColor" value="#7CFC0000" />
+		</attributes>
+	</node>
+	
+	<node type="ClassObject">
+		<attributes>
+			<string name="Name" value="Player" />
+			<int name="Id" value="999" />
+			<vector3d name="Position" value="0, 10, 0" />
+			<vector3d name="Rotation" value="0.000000, 79.580002, 0.000000" />
+			<vector3d name="Scale" value="1.000000, 1.000000, 1.000000" />
+			<bool name="Visible" value="true" />
+			<path name="SubLevelFileName" value="Content/Levels/Class_Player.irr" />
+			<bool name="HasRenderables" value="true" />
+			<bool name="ClassCollision" value="true" />
+			<expression name="RemoveTempJointsTagged" value="" />
+			<expression name="TempJointObjects" value="" />
+			<string name="TempJointTags" value="" />
+			<path name="DefinitionOverridePath" value="" />
+			<int name="VariableOverrideCount" value="1" />
+			<int name="AttributeOverrideCount" value="1" />
+		</attributes>
+	</node>
+</irr_scene>
