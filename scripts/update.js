@@ -36,11 +36,13 @@ fetch("https://mzigi.github.io/Unofficial-Bugsnax-Editor/jscontent/RealPropertie
 })
 .then(temporar => RealPropertiesInfo = temporar);
 
-fetch("https://mzigi.github.io/Unofficial-Bugsnax-Editor/jscontent/DefaultLevel.irr")
+DefaultLevel = loadXMLDoc("https://mzigi.github.io/Unofficial-Bugsnax-Editor/jscontent/DefaultLevel.xml"); 
+
+/*fetch("https://mzigi.github.io/Unofficial-Bugsnax-Editor/jscontent/DefaultLevel.xml")
 .then(response => {
    return response
 })
-.then(temporar => DefaultLevel = temporar);
+.then(temporar => DefaultLevel = temporar);*/
 
 var childrenNotAdded = []
 
