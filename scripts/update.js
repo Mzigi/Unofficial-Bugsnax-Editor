@@ -153,6 +153,8 @@ function refreshAttributes() {
           if (keyType !== "enum" && keyType !== "color" && keyType !== "colorf") {
             console.log("final")
             input.setAttribute("value",selectedNodeElement.querySelector(keyType + '[name="' + key + '"]').getAttribute("value"))
+          } else if (keyType === "enum") {
+            input.value = selectedNodeElement.querySelector(keyType + '[name="' + key + '"]').getAttribute("value")
           }
         } else {
           console.log(keyType + '[name="' + key + '"]')
@@ -573,15 +575,17 @@ function fileMenuButtons() {
   }
 }
 
-/*document.body.addEventListener('click', function(e){   
-  for (let i = 0; i < selectedLiElements.length; i++) {
-    selectedLiElements[i].querySelector(":scope > span").classList.remove("selectedLi")
+document.body.addEventListener('click', function(e){   
+  if (!document.getElementById("SceneTree").contains(e.target)) {
+    for (let i = 0; i < selectedLiElements.length; i++) {
+      selectedLiElements[i].querySelector(":scope > span").classList.remove("selectedLi")
+    }
+    selectedLiElements = []
   }
-  selectedLiElements = []
   if (!document.getElementById('dropdown-File').contains(e.target) && document.getElementById('dropdown-File').querySelector(".dropdown-content").classList.contains("dropdown-content-opened")){
     document.getElementById('dropdown-File').querySelector(".dropdown-content").classList.toggle("dropdown-content-opened");
   }
-});*/
+});
 
 function loadNewFile() {
   if (currentFileIndex < files.length) {
