@@ -9,6 +9,9 @@ var files = null
 var selectedLiElements = []
 var CurrentPropertyType ="Attributes"
 
+var LoadedNodes = 0
+var MaxLoadedNodes = 0
+
 var PropertiesInfoExample = {
   "PhysicsObject": {
     "x": {
@@ -79,91 +82,154 @@ function refreshAttributes() {
     document.getElementById("Attributes").innerHTML = ""
 
     Object.keys(AllProperties).forEach(function(key) {
-      let keyType = AllProperties[key]["type"]
+      let hidden = false
 
-      let property = document.createElement("div")
-      property.classList.add("property")
+      console.log(AllProperties[key])
 
-      let propertyName = document.createElement("div")
-      propertyName.classList.add("propertyName")
-      propertyName.innerHTML = key
-      property.appendChild(propertyName)
-
-      let propertyValue = document.createElement("div")
-      propertyValue.classList.add("propertyValue")
-      property.appendChild(propertyValue)
-
-      let input = document.createElement("input")
-      if (keyType === "int") {
-        input.setAttribute("type","number")
-        input.setAttribute("step","1")
-      } else if (keyType === "bool") {
-        input.setAttribute("type","checkbox")
-      } else if (keyType === "enum") {
-        input.remove()
-        input = document.createElement("select")
-
-        let option = document.createElement("option")
-        option.setAttribute("value", "null")
-        option.innerHTML = "null"
-        input.appendChild(option)
-
-        let values = AllProperties[key]["values"]
-        for (let i = 0; i < values.length; i += 1) {
-          let option = document.createElement("option")
-          option.setAttribute("value", values[i])
-          option.innerHTML = values[i]
-          input.appendChild(option)
+      let presentWhenCondition = AllProperties[key]["presentWhenCondition"]
+      if (presentWhenCondition !== undefined) {
+          presentWhenCondition = presentWhenCondition[0]
+        console.log(presentWhenCondition)
+        if (presentWhenCondition === "Immediately") {
+          presentWhenCondition = undefined
         }
-      } else if (keyType === "color") {
-        input.setAttribute("type", "color")
-
-        let alpha = document.createElement("input")
-        alpha.setAttribute("type","color")
-        alpha.setAttribute("min","0")
-        alpha.setAttribute("max","1")
-        alpha.setAttribute("step","0.01")
-        alpha.setAttribute("placeholder", "alpha")
-      } else if (keyType === "float") {
-        input.setAttribute("type", "number")
-        input.setAttribute("step", "0.000000001")
-      } else if (keyType === "expression") {
-        input.setAttribute("placeholder", "@#Cake,Player,!102")
-      } else if (keyType === "path") {
-        input.setAttribute("placeholder", "Content/Models/Bugs/Apple/Apple.x")
-      } else if (keyType === "vector3") {
-        input.setAttribute("value","0.0, 0.0, 0.0")
-      } else if (keyType === "colorf") {
-        input.setAttribute("type", "color")
-
-        let alpha = document.createElement("input")
-        alpha.setAttribute("type","color")
-        alpha.setAttribute("min","0")
-        alpha.setAttribute("max","1")
-        alpha.setAttribute("step","0.01")
-        alpha.setAttribute("placeholder", "alpha")
-      } else {
-        input.setAttribute("placeholder", keyType)
+        console.log(presentWhenCondition)
       }
-      propertyValue.appendChild(input)
+      
+      let presentWhenOnTrigger = AllProperties[key]["presentWhenOnTrigger"]
+      if (presentWhenOnTrigger !== undefined) {
+        presentWhenOnTrigger = presentWhenOnTrigger[0]
+        console.log(presentWhenOnTrigger)
+        if (presentWhenOnTrigger === "Nothing") {
+          presentWhenOnTrigger = undefined
+        }
+        console.log(presentWhenOnTrigger)
+      }
 
-      if (selectedNodeElement.querySelector(":scope > attributes")) {
-        if (selectedNodeElement.querySelector(keyType + '[name="' + key + '"]')) {
-          console.log("success! " + keyType + '[name="' + key + '"]')
-          if (keyType !== "enum" && keyType !== "color" && keyType !== "colorf") {
-            console.log("final")
-            input.setAttribute("value",selectedNodeElement.querySelector(keyType + '[name="' + key + '"]').getAttribute("value"))
-          } else if (keyType === "enum") {
-            input.value = selectedNodeElement.querySelector(keyType + '[name="' + key + '"]').getAttribute("value")
+
+      if (presentWhenOnTrigger == undefined && presentWhenCondition != undefined) {
+        console.log("v\nv\nv\nv\nv")
+        if (selectedNodeElement.querySelector(":scope > attributes").querySelector(':scope > enum[name="TriggerCondition"]').getAttribute("value") != presentWhenCondition[0]) {
+          hidden = true
+          console.log("HIDING PROPERTY: " + key)
+        }
+      }
+
+      if (presentWhenCondition == undefined && presentWhenOnTrigger != undefined) {
+        console.log("w\nv\nv\nv\nv")
+        if (selectedNodeElement.querySelector(":scope > attributes").querySelector(':scope > enum[name="OnTriggerEvent"]').getAttribute("value") != presentWhenOnTrigger[0]) {
+          hidden = true
+          console.log("HIDING PROPERTY: " + key)
+        }
+      }
+
+      if (presentWhenCondition != undefined && presentWhenOnTrigger != undefined) {
+        let areAnyCorrect = false
+        if (selectedNodeElement.querySelector(":scope > attributes").querySelector(':scope > enum[name="OnTriggerEvent"]').getAttribute("value") == presentWhenOnTrigger[0]) {
+          areAnyCorrect = true
+        }
+        if (selectedNodeElement.querySelector(":scope > attributes").querySelector(':scope > enum[name="TriggerCondition"]').getAttribute("value") == presentWhenCondition[0]) {
+          areAnyCorrect = true
+        }
+        if (areAnyCorrect === false) {
+          hidden = true
+          console.log("HIDING PROPERTY: " + key)
+        }
+      }
+
+
+      if (hidden != true) {
+        console.log("RENDERING PROPERTY" + key)
+        console.log(AllProperties[key])
+
+        let keyType = AllProperties[key]["type"]
+
+        let property = document.createElement("div")
+        property.classList.add("property")
+
+        let propertyName = document.createElement("div")
+        propertyName.classList.add("propertyName")
+        propertyName.innerHTML = key
+        property.appendChild(propertyName)
+
+        let propertyValue = document.createElement("div")
+        propertyValue.classList.add("propertyValue")
+        property.appendChild(propertyValue)
+
+        let input = document.createElement("input")
+        if (keyType === "int") {
+          input.setAttribute("type","number")
+          input.setAttribute("step","1")
+        } else if (keyType === "bool") {
+          input.setAttribute("type","checkbox")
+        } else if (keyType === "enum") {
+          input.remove()
+          input = document.createElement("select")
+
+          let option = document.createElement("option")
+          option.setAttribute("value", "null")
+          option.innerHTML = "null"
+          input.appendChild(option)
+
+          let values = AllProperties[key]["values"]
+          for (let i = 0; i < values.length; i += 1) {
+            let option = document.createElement("option")
+            option.setAttribute("value", values[i])
+            option.innerHTML = values[i]
+            input.appendChild(option)
+          }
+        } else if (keyType === "color") {
+          input.setAttribute("type", "color")
+
+          let alpha = document.createElement("input")
+          alpha.setAttribute("type","color")
+          alpha.setAttribute("min","0")
+          alpha.setAttribute("max","1")
+          alpha.setAttribute("step","0.01")
+          alpha.setAttribute("placeholder", "alpha")
+        } else if (keyType === "float") {
+          input.setAttribute("type", "number")
+          input.setAttribute("step", "0.000000001")
+        } else if (keyType === "expression") {
+          input.setAttribute("placeholder", "@#Cake,Player,!102")
+        } else if (keyType === "path") {
+          input.setAttribute("placeholder", "Content/Models/Bugs/Apple/Apple.x")
+        } else if (keyType === "vector3") {
+          input.setAttribute("value","0.0, 0.0, 0.0")
+        } else if (keyType === "colorf") {
+          input.setAttribute("type", "color")
+
+          let alpha = document.createElement("input")
+          alpha.setAttribute("type","color")
+          alpha.setAttribute("min","0")
+          alpha.setAttribute("max","1")
+          alpha.setAttribute("step","0.01")
+          alpha.setAttribute("placeholder", "alpha")
+        } else {
+          input.setAttribute("placeholder", keyType)
+        }
+        propertyValue.appendChild(input)
+
+        if (selectedNodeElement.querySelector(":scope > attributes")) {
+          if (selectedNodeElement.querySelector(keyType + '[name="' + key + '"]')) {
+            console.log("success! " + keyType + '[name="' + key + '"]')
+            if (keyType !== "enum" && keyType !== "color" && keyType !== "colorf") {
+              console.log("final")
+              input.setAttribute("value",selectedNodeElement.querySelector(keyType + '[name="' + key + '"]').getAttribute("value"))
+            } else if (keyType === "enum") {
+              input.value = selectedNodeElement.querySelector(keyType + '[name="' + key + '"]').getAttribute("value")
+            } else if (keyType === "color") {
+              
+            }
+          } else {
+            console.log(keyType + '[name="' + key + '"]')
           }
         } else {
-          console.log(keyType + '[name="' + key + '"]')
+          console.log("HUH?")
         }
-      } else {
-        console.log("HUH?")
-      }
 
-      document.getElementById("Attributes").appendChild(property)
+        document.getElementById("Attributes").appendChild(property)
+      }
     })
   }
 }
@@ -300,7 +366,6 @@ function irrGetNodeAtPath(path) {
 }*/
 
 function createVisualizedNode(xmlPath, elementParent2) {
-  console.log("new node at " + xmlPath)
   xmlNode = null;
   xmlNode = irrGetNodeAtPath(xmlPath)
   xmlNodeChildren = xmlNode.querySelectorAll(":scope > node")
@@ -372,7 +437,6 @@ function createVisualizedNode(xmlPath, elementParent2) {
   }
 
   for (let b = 0; b < nodeAttributes.length; b++) {
-    console.log("trigger objecting")
     if (nodeType === "TriggerObject") {
       if (!["Name","Position","Rotation","Scale","Visible","TriggerStartExpression","TriggerCondition","OnTriggerEvent","OnceCondMetAlways"].includes(nodeAttributes[b].getAttribute("name"))) {
         if (PropertiesInfo[nodeType][nodeAttributes[b].getAttribute("name")]["presentWhenCondition"] !== undefined) { //TRIGGER CONDITION
@@ -554,6 +618,8 @@ function addDOMChildrenElements(path) {
   let childrenElements = parent.querySelectorAll(":scope > node")
   for (let i = 0; i < childrenElements.length; i++) {
     createVisualizedNode(path + ":" + i, document.getElementById("SceneTreeList").querySelector('li[data-internalid="' + path + '"]'))
+    LoadedNodes += 1
+    console.log(LoadedNodes + "/" + MaxLoadedNodes)
   }
 }
 
@@ -568,11 +634,17 @@ function refreshStructure() {
 
   console.log(irrGetNodeAtPath("0:0"))
 
+
+  LoadedNodes = 0
+  MaxLoadedNodes = irrScene.querySelectorAll("node").length
+
   addDOMChildrenElements("0")
 
   childrenNotAdded.shift()
 
   var j = 0;
+
+
 
   while (childrenNotAdded.length > 0 && childrenNotAdded.length !== undefined) {
     addDOMChildrenElements(childrenNotAdded[j].getAttribute("data-internalid"))
@@ -589,7 +661,6 @@ function refreshStructure() {
   console.log("IMPORTANT THIN!!!!!!!!! " + irrGetNodeAtPath(""))
 
   updateSceneList()
-  
 }
 
 //FILE MENY
