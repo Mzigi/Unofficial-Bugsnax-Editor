@@ -36,7 +36,20 @@ fetch("https://mzigi.github.io/Unofficial-Bugsnax-Editor/jscontent/RealPropertie
 })
 .then(temporar => RealPropertiesInfo = temporar);
 
-DefaultLevel = loadXMLDoc("https://mzigi.github.io/Unofficial-Bugsnax-Editor/jscontent/DefaultLevel.xml"); 
+
+var x = new XMLHttpRequest();
+x.open("GET", "https://mzigi.github.io/Unofficial-Bugsnax-Editor/jscontent/DefaultLevel.xml", true);
+x.onreadystatechange = function () {
+  if (x.readyState == 4 && x.status == 200)
+  {
+    DefaultLevel = x.responseText
+    // …
+  }
+};
+x.send(null);
+
+console.log(DefaultLevel)
+console.log(x)
 
 /*fetch("https://mzigi.github.io/Unofficial-Bugsnax-Editor/jscontent/DefaultLevel.xml")
 .then(response => {
@@ -196,7 +209,7 @@ function refreshAttributes() {
 
           alpha = document.createElement("input")
           alpha.setAttribute("type","number")
-          alpha.setAttribute("min","1")
+          alpha.setAttribute("min","0")
           alpha.setAttribute("max","255")
           alpha.setAttribute("step","1")
           alpha.setAttribute("placeholder", "alpha")
@@ -214,7 +227,7 @@ function refreshAttributes() {
 
           alpha = document.createElement("input")
           alpha.setAttribute("type","number")
-          alpha.setAttribute("min","1")
+          alpha.setAttribute("min","0")
           alpha.setAttribute("max","255")
           alpha.setAttribute("step","1")
           alpha.setAttribute("placeholder", "alpha")
@@ -235,8 +248,21 @@ function refreshAttributes() {
             } else if (keyType === "enum") {
               input.value = selectedNodeElement.querySelector(keyType + '[name="' + key + '"]').getAttribute("value")
             } else if (keyType === "color") {
-              console.log("AAAAAAAAAAAAAAAA: " + selectedNodeElement.querySelector(keyType + '[name="' + key + '"]').getAttribute("value").splice(0,7))
-              input.setAttribute("value",selectedNodeElement.querySelector(keyType + '[name="' + key + '"]').getAttribute("value").splice(0,7))
+              console.log("AAAAAAAAAAAAAAAA: " + selectedNodeElement.querySelector(keyType + '[name="' + key + '"]').getAttribute("value").slice(0,7))
+              input.setAttribute("value",selectedNodeElement.querySelector(keyType + '[name="' + key + '"]').getAttribute("value").slice(0,7))
+              console.log("ALPHA IS " + selectedNodeElement.querySelector(keyType + '[name="' + key + '"]').getAttribute("value").slice(7,9))
+              alpha.setAttribute("value",parseInt(selectedNodeElement.querySelector(keyType + '[name="' + key + '"]').getAttribute("value").slice(7,9),16))
+            } else if (keyType === "colorf") {
+              var color = selectedNodeElement.querySelector(keyType + '[name="' + key + '"]').getAttribute("value").split(",")
+              alphaColor = color[3]
+              console.log(color)
+              color = tinycolor({r:Math.floor(color[0] * 255),g:Math.floor(color[1] * 255),b:Math.floor(color[2] * 255),a:Math.floor(color[3] * 255)})
+              console.log(color)
+              color = color.toHexString()
+              console.log(color)
+
+              input.setAttribute("value",color.slice(0,7))
+              alpha.setAttribute("value",parseInt(alphaColor * 255))
             }
           } else {
             console.log(keyType + '[name="' + key + '"]')
