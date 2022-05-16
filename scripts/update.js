@@ -161,12 +161,9 @@ function refreshAttributes() {
 
 
       if (hidden != true) {
-        console.log("RENDERING PROPERTY" + key)
         console.log(AllProperties[key])
 
         let keyType = AllProperties[key]["type"]
-
-        console.log("keyType is " + keyType)
 
         let property = document.createElement("div")
         property.classList.add("property")
@@ -550,18 +547,123 @@ function createVisualizedNode(xmlPath, elementParent2) {
 
   li.appendChild(span)
 
-  span.addEventListener("ondragover",function(e) {
-    e.preventDefault()
+  let lastDrawnOver = null
+
+  li.addEventListener("dragstart", function(e) {
+    e.stopPropagation()
+    if (e.dataTransfer.getData("text/plain") == "") {
+      e.dataTransfer.setData("text/plain", li.getAttribute("data-internalid"))
+      console.log(li.getAttribute("data-internalid"))
+    }
   })
 
-  span.addEventListener("ondragstart",function(e) {
-    e.dataTransfer.setData("text", e.getAttribute("data-internalid"))
+  li.addEventListener("dragover", function(e) {
+    e.stopPropagation()
+    e.preventDefault()
+
+    if (lastDrawnOver) {
+      lastDrawnOver.classList.remove("dragOverLi")
+    }
+    lastDrawnOver = e.target
+    e.target.classList.add("dragOverLi")
   })
   
-  span.addEventListener("ondrop",function(e) {
-    e.preventDefault()
-    let dataInternalId = e.dataTransfer.getData("text")
-    e.target.appendChild(document.querySelector('li[data-internalid="' + dataInternalId + '"]'))
+  li.addEventListener("drop", function(e) {
+    e.stopPropagation()
+    if (e.dataTransfer.getData("text/plain") != li.getAttribute("data-internalid")) {
+      e.preventDefault()
+
+      if (lastDrawnOver) {
+        lastDrawnOver.classList.remove("dragOverLi")
+      }
+      let dataInternalId = e.dataTransfer.getData("text/plain")
+      console.log(e.target)
+      let eTarget = e.target
+      if (eTarget.tagName.toLowerCase() === "span") {
+        eTarget = eTarget.parentElement
+      }
+      if (eTarget.tagName.toLowerCase() === "button") {
+        eTarget = eTarget.parentElement
+      }
+      if (eTarget.tagName.toLowerCase() === "ul") {
+        eTarget = eTarget.parentElement
+      }
+      console.log("LOOK HERE!!!!1")
+      console.log(eTarget)
+      let targetDataInternalId = eTarget.getAttribute("data-internalid")
+      console.log("target is " + targetDataInternalId)
+
+      let liElement = document.querySelector('li[data-internalid="' + dataInternalId + '"]')
+      let targetLiElement = document.querySelector('li[data-internalid="' + targetDataInternalId + '"]')
+      let targetNodeElement = currentIrr
+      for (i = 0; i < targetDataInternalId.split(":").length; i += 1) {
+        if (i === 0) {
+          targetNodeElement = currentIrr.querySelector("irr_scene")
+        } else {
+          targetNodeElement = targetNodeElement.querySelectorAll(":scope > node")[parseInt(targetDataInternalId.split(":")[i])]
+        }
+      }
+
+      console.log(targetNodeElement)
+      let nodeElement = irrGetNodeAtPath(dataInternalId)
+      let startElement = parseInt(dataInternalId.split(":")[dataInternalId.split(":").length - 1]) + 1
+      let nodeAfterElementsCount = parseInt(nodeElement.parentElement.querySelectorAll(":scope > node").length) - 1 - startElement
+
+      if (targetNodeElement === nodeElement.parentElement) {
+        return
+      }
+
+      console.log("start element is: " + startElement)
+      let endElementCounts = startElement + nodeAfterElementsCount
+      console.log("end element is: " + endElementCounts)
+
+      for (let i = startElement; i <= startElement + nodeAfterElementsCount; i += 1) {
+        let CurrentElementDataInternalId = liElement.parentElement.querySelectorAll(":scope > li")[i].getAttribute("data-internalid")
+        CurrentElementDataInternalId = CurrentElementDataInternalId.split(":")
+        CurrentElementDataInternalId[CurrentElementDataInternalId.length - 1] = parseInt(CurrentElementDataInternalId[CurrentElementDataInternalId.length - 1]) - 1
+
+        let newDataInternalId = ""
+
+        for (let j = 0; j < CurrentElementDataInternalId.length; j += 1) {
+          if (j == 0) {
+            newDataInternalId = String(CurrentElementDataInternalId[0])
+          } else {
+            newDataInternalId = newDataInternalId + ":" + String(CurrentElementDataInternalId[j])
+          }
+        }
+
+        liElement.parentElement.querySelectorAll(":scope > li")[i].setAttribute("data-internalid", newDataInternalId)
+      }
+
+
+      console.log(currentIrr)
+      console.log(targetNodeElement)
+      console.log(nodeElement)
+      targetNodeElement.appendChild(nodeElement)
+
+      if (targetLiElement.querySelector(":scope > ul") !== null) {
+        targetLiElement.querySelector(":scope > ul").appendChild(liElement)
+        liElement.setAttribute("data-internalid",targetLiElement.getAttribute("data-internalid") + ":" + String(targetLiElement.querySelector(":scope > ul").querySelectorAll(":scope > li").length))
+      } else {
+        let newButton = document.createElement("button")
+        newButton.classList.add("caretButton")
+        newButton.innerHTML = "+"
+        targetLiElement.insertBefore(newButton,targetLiElement.querySelector(":scope > span"))
+
+        let newNestedUl = document.createElement("ul")
+        newNestedUl.classList.add("nested")
+        targetLiElement.appendChild(newNestedUl)
+
+        liElement.setAttribute("data-internalid",targetLiElement.getAttribute("data-internalid") + ":0")
+
+        newNestedUl.appendChild(liElement)
+
+        updateSceneList()
+      }
+
+      console.log(currentIrr)
+    }
+    
   })
 
   span.addEventListener("click", function(e) {
@@ -751,6 +853,7 @@ function loadNewFile() {
 }
 
 document.getElementById("FileMenu-Open").addEventListener("change", function(e){
+  document.getElementById('dropdown-File').querySelector(".dropdown-content").classList.toggle("dropdown-content-opened");
   files = document.getElementById("FileMenu-Open").files
   console.log(files)
   currentFileIndex = 0;
@@ -758,16 +861,19 @@ document.getElementById("FileMenu-Open").addEventListener("change", function(e){
 })
 
 document.getElementById("FileMenu-SaveAs").addEventListener("click", function(e){
+  document.getElementById('dropdown-File').querySelector(".dropdown-content").classList.toggle("dropdown-content-opened");
   download("NewLevel.irr",new XMLSerializer().serializeToString(currentIrr))
 })
 
 document.getElementById("FileMenu-New").addEventListener("click", function(e){
+  document.getElementById('dropdown-File').querySelector(".dropdown-content").classList.toggle("dropdown-content-opened");
   currentIrr = parser.parseFromString(DefaultLevel,"text/xml");
   refreshStructure()
 })
 
 
 document.getElementById("FileMenu-PropertyInfo").addEventListener("click", function(e){
+  document.getElementById('dropdown-File').querySelector(".dropdown-content").classList.toggle("dropdown-content-opened");
   download("PropertiesInfo.json", JSON.stringify(PropertiesInfo))
 })
 

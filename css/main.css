@@ -108,6 +108,10 @@ ul, #SceneTreeList {
     list-style-type: none;
 }
 
+.dragOverLi {
+    background-color: rgb(197, 197, 197);
+}
+
 #SceneTreeList {
     margin: 0;
     padding-right: 3px;
