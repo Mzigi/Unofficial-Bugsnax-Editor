@@ -643,7 +643,7 @@ function createVisualizedNode(xmlPath, elementParent2) {
 
       if (targetLiElement.querySelector(":scope > ul") !== null) {
         targetLiElement.querySelector(":scope > ul").appendChild(liElement)
-        liElement.setAttribute("data-internalid",targetLiElement.getAttribute("data-internalid") + ":" + String(targetLiElement.querySelector(":scope > ul").querySelectorAll(":scope > li").length))
+        liElement.setAttribute("data-internalid",targetLiElement.getAttribute("data-internalid") + ":" + String(targetLiElement.querySelector(":scope > ul").querySelectorAll(":scope > li").length - 1))
       } else {
         let newButton = document.createElement("button")
         newButton.classList.add("caretButton")
