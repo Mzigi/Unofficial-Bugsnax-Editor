@@ -570,8 +570,8 @@ function createVisualizedNode(xmlPath, elementParent2) {
   
   li.addEventListener("drop", function(e) {
     e.stopPropagation()
+    e.preventDefault()
     if (e.dataTransfer.getData("text/plain") != li.getAttribute("data-internalid")) {
-      e.preventDefault()
 
       if (lastDrawnOver) {
         lastDrawnOver.classList.remove("dragOverLi")
@@ -613,6 +613,11 @@ function createVisualizedNode(xmlPath, elementParent2) {
         return
       }
 
+      if (nodeElement.contains(targetNodeElement)) {
+        console.log("cant self insert")
+        return
+      }
+
       console.log("start element is: " + startElement)
       let endElementCounts = startElement + nodeAfterElementsCount
       console.log("end element is: " + endElementCounts)
@@ -641,6 +646,18 @@ function createVisualizedNode(xmlPath, elementParent2) {
       console.log(nodeElement)
       targetNodeElement.appendChild(nodeElement)
 
+      console.log("WAJDSA: ")
+      console.log(liElement.parentElement.childNodes)
+      console.log(liElement.parentElement.querySelector(":scope > button"))
+
+      let toBeRemovedUlElement = null
+
+      if (liElement.parentElement.childNodes.length === 1 && liElement.parentElement.parentElement.querySelector(":scope > button") !== null) {
+        liElement.parentElement.parentElement.querySelector(":scope > button").remove()
+        liElement.parentElement.classList.add("nested")
+        toBeRemovedUlElement = liElement.parentElement
+      }
+
       if (targetLiElement.querySelector(":scope > ul") !== null) {
         targetLiElement.querySelector(":scope > ul").appendChild(liElement)
         liElement.setAttribute("data-internalid",targetLiElement.getAttribute("data-internalid") + ":" + String(targetLiElement.querySelector(":scope > ul").querySelectorAll(":scope > li").length - 1))
@@ -661,6 +678,10 @@ function createVisualizedNode(xmlPath, elementParent2) {
         updateSceneList()
       }
 
+      if (toBeRemovedUlElement !== null) {
+        toBeRemovedUlElement.remove()
+      }
+      
       console.log(currentIrr)
     }
     
