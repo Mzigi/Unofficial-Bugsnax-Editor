@@ -570,8 +570,8 @@ function createVisualizedNode(xmlPath, elementParent2) {
   
   li.addEventListener("drop", function(e) {
     e.stopPropagation()
-    e.preventDefault()
     if (e.dataTransfer.getData("text/plain") != li.getAttribute("data-internalid")) {
+      e.preventDefault()
 
       if (lastDrawnOver) {
         lastDrawnOver.classList.remove("dragOverLi")
@@ -610,11 +610,6 @@ function createVisualizedNode(xmlPath, elementParent2) {
       let nodeAfterElementsCount = parseInt(nodeElement.parentElement.querySelectorAll(":scope > node").length) - 1 - startElement
 
       if (targetNodeElement === nodeElement.parentElement) {
-        return
-      }
-
-      if (nodeElement.contains(targetNodeElement)) {
-        console.log("cant self insert")
         return
       }
 
@@ -669,7 +664,7 @@ function createVisualizedNode(xmlPath, elementParent2) {
         }
         if (UnchangedInternalIds[0].querySelector(":scope > ul") !== null) {
           for (let g = 0; g < UnchangedInternalIds[0].querySelector(":scope > ul").querySelectorAll("li").length; g += 1) {
-            UnchangedInternalIds.push(UnchangedInternalIds[0].querySelector(":scope > ul").querySelectorAll("li")[g])
+            UnchangedInternalIds.push(UnchangedInternalIds[0].querySelector(":scope > ul").querySelectorAll("li")[g]) //li element thing
           }
         }
 
@@ -683,17 +678,13 @@ function createVisualizedNode(xmlPath, elementParent2) {
       console.log(nodeElement)
       targetNodeElement.appendChild(nodeElement)
 
-      console.log("WAJDSA: ")
-      console.log(liElement.parentElement.childNodes)
-      console.log(liElement.parentElement.querySelector(":scope > button"))
-
-      let toBeRemovedUlElement = null
-
-      if (liElement.parentElement.childNodes.length === 1 && liElement.parentElement.parentElement.querySelector(":scope > button") !== null) {
-        liElement.parentElement.parentElement.querySelector(":scope > button").remove()
-        liElement.parentElement.classList.add("nested")
-        toBeRemovedUlElement = liElement.parentElement
+      if (liElement.parentElement.parentElement.querySelector(":scope > button") !== null) {
+        if (liElement.parentElement.querySelectorAll(":scope > li").length < 2) {
+          liElement.parentElement.parentElement.querySelector(":scope > button").remove()
+        }
       }
+
+      lastParentUlForLiElement = liElement.parentElement
 
       if (targetLiElement.querySelector(":scope > ul") !== null) {
         targetLiElement.querySelector(":scope > ul").appendChild(liElement)
@@ -715,10 +706,48 @@ function createVisualizedNode(xmlPath, elementParent2) {
         updateSceneList()
       }
 
-      if (toBeRemovedUlElement !== null) {
-        toBeRemovedUlElement.remove()
+      if (liElement.querySelector(":scope > ul") !== null) {
+        let theChildrenOfTheLi = liElement.querySelector(":scope > ul").querySelectorAll(":scope > li")
+        for (let j = 0; j < theChildrenOfTheLi.length; j += 1) {
+          UnchangedInternalIds.push(theChildrenOfTheLi[j])
+        }
       }
-      
+
+      while (UnchangedInternalIds.length > 0) {
+        let CurrentElementDataInternalId = UnchangedInternalIds[0].getAttribute("data-internalid")
+        CurrentElementDataInternalId = CurrentElementDataInternalId.split(":")
+
+        let ParentInternalId = UnchangedInternalIds[0].parentElement.parentElement.getAttribute("data-internalid").split(":")
+        ParentInternalId.push(CurrentElementDataInternalId[CurrentElementDataInternalId.length - 1])
+
+        let newDataInternalId = ""
+
+        for (let g = 0; g < ParentInternalId.length; g += 1) {
+          if (g === 0) {
+            newDataInternalId = String(ParentInternalId[g])
+          } else {
+            newDataInternalId = newDataInternalId + ":" + String(ParentInternalId[g])
+          }
+        }
+
+        if (UnchangedInternalIds[0].querySelector(":scope > ul") !== null) {
+          for (let g = 0; g < UnchangedInternalIds[0].querySelector(":scope > ul").querySelectorAll("li").length; g += 1) {
+            UnchangedInternalIds.push(UnchangedInternalIds[0].querySelector(":scope > ul").querySelectorAll("li")[g])
+          }
+        }
+
+        UnchangedInternalIds[0].setAttribute("data-internalid", newDataInternalId)
+
+        UnchangedInternalIds.shift()
+      }
+
+
+      console.log(lastParentUlForLiElement)
+
+      if (lastParentUlForLiElement.querySelectorAll(":scope > li").length < 1) {
+        lastParentUlForLiElement.remove()
+      }
+
       console.log(currentIrr)
     }
     
