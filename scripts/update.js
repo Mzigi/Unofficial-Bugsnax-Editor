@@ -617,6 +617,8 @@ function createVisualizedNode(xmlPath, elementParent2) {
       let endElementCounts = startElement + nodeAfterElementsCount
       console.log("end element is: " + endElementCounts)
 
+      let UnchangedInternalIds = []
+
       for (let i = startElement; i <= startElement + nodeAfterElementsCount; i += 1) {
         let CurrentElementDataInternalId = liElement.parentElement.querySelectorAll(":scope > li")[i].getAttribute("data-internalid")
         CurrentElementDataInternalId = CurrentElementDataInternalId.split(":")
@@ -631,10 +633,45 @@ function createVisualizedNode(xmlPath, elementParent2) {
             newDataInternalId = newDataInternalId + ":" + String(CurrentElementDataInternalId[j])
           }
         }
+        if (liElement.parentElement.querySelectorAll(":scope > li")[i].querySelector(":scope > ul") !== null) {
+          console.log("first stage")
+          for (let g = 0; g < liElement.parentElement.querySelectorAll(":scope > li")[i].querySelector(":scope > ul").querySelectorAll("li").length; g += 1) {
+            console.log("pushing")
+            UnchangedInternalIds.push(liElement.parentElement.querySelectorAll(":scope > li")[i].querySelector(":scope > ul").querySelectorAll("li")[g])
+          }
+        }
+        
 
         liElement.parentElement.querySelectorAll(":scope > li")[i].setAttribute("data-internalid", newDataInternalId)
       }
 
+      console.log("HERE IT IS")
+      console.log(UnchangedInternalIds)
+
+      while (UnchangedInternalIds.length > 0) {
+        let CurrentElementDataInternalId = UnchangedInternalIds[0].getAttribute("data-internalid")
+        CurrentElementDataInternalId = CurrentElementDataInternalId.split(":")
+        CurrentElementDataInternalId[CurrentElementDataInternalId.length - 2] = parseInt(CurrentElementDataInternalId[CurrentElementDataInternalId.length - 2]) - 1
+
+        let newDataInternalId = ""
+
+        for (let j = 0; j < CurrentElementDataInternalId.length; j += 1) {
+          if (j == 0) {
+            newDataInternalId = String(CurrentElementDataInternalId[0])
+          } else {
+            newDataInternalId = newDataInternalId + ":" + String(CurrentElementDataInternalId[j])
+          }
+        }
+        if (UnchangedInternalIds[0].querySelector(":scope > ul") !== null) {
+          for (let g = 0; g < UnchangedInternalIds[0].querySelector(":scope > ul").querySelectorAll("li").length; g += 1) {
+            UnchangedInternalIds.push(UnchangedInternalIds[0].querySelector(":scope > ul").querySelectorAll("li")[g])
+          }
+        }
+
+        UnchangedInternalIds[0].setAttribute("data-internalid", newDataInternalId)
+
+        UnchangedInternalIds.shift()
+      }
 
       console.log(currentIrr)
       console.log(targetNodeElement)
