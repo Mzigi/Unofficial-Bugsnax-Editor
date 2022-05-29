@@ -578,6 +578,20 @@ function createVisualizedNode(xmlPath, elementParent2) {
           console.error( error );
         
         })
+
+        var Models = [];
+
+        console.log("https://raw.githubusercontent.com/Mzigi/Unofficial-Bugsnax-Editor/main/" + xmlNode.querySelector(":scope > attributes").querySelector('path[name="MeshFileName"]').getAttribute("value"))
+        loader.load(["https://raw.githubusercontent.com/Mzigi/Unofficial-Bugsnax-Editor/main/" + xmlNode.querySelector(":scope > attributes").querySelector('path[name="MeshFileName"]').getAttribute("value")], function (object) {
+            for (var i = 0; i < object.models.length; i++) {
+                    Models.push(object.models[i]);    
+                    scene.add(Models[i]);
+                    Models[i].position.x = Number(splitPosition[0])
+                    Models[i].position.y = Number(splitPosition[1])
+                    Models[i].position.z = Number(splitPosition[2])
+            }
+            object = null;
+        }, onProgress, onError);
       }
     }
   }
