@@ -1,0 +1,20 @@
+newmtl blinn1SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd GrumpHut_paint_Shelda_D.dds
+bump  -bm 1 GrumpHut_N.dds
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Ks GrumpHut_paint_S.dds
+newmtl blinn2SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd GrumpHutAdditions01_D.dds
+bump  -bm 1 GrumpHutAdditions01_N.dds
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Ks GrumpHutAdditions01_S.dds

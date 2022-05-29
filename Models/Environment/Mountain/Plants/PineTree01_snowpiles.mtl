@@ -1,0 +1,20 @@
+newmtl PineTree01_blinn1SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd PineTree_D.dds
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Ks PineTree_S.dds
+Ns 0.06
+newmtl blinn1SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd MountainBush01_snow_D.dds
+bump  -bm 1 MountainBush01_snow_N.dds
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Ks MountainBush01_snow_S.dds

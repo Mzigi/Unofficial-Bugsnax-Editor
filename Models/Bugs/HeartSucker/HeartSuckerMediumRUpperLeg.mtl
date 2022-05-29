@@ -1,0 +1,33 @@
+newmtl delete14:blinn3SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd HeartSucker_D.dds
+bump  -bm 1 HeartSucker_N.dds
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Ks HeartSucker_S.dds
+Ns 0.06
+newmtl initialShadingGroup
+illum 4
+Kd 0.50 0.50 0.50
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl lambert13SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd HeartSuckerGrumpus_D.dds
+bump  -bm 1 HeartSuckerGrumpus_N.dds
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Ks HeartSuckerGrumpus_S.dds
+newmtl lambert16SG
+illum 4
+Kd 1.00 1.00 1.00
+Ka 0.00 0.00 0.00
+Tf 0.14 0.14 0.14
+Ni 1.00

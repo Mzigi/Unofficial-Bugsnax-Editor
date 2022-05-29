@@ -1,0 +1,21 @@
+newmtl kiddiePool:blinn6SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd kiddiePool_D.dds
+bump  -bm 1 kiddiePool_N.dds
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Ks kiddiePool_S.dds
+Ns 0.06
+newmtl kiddiePool:blinn7SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd kiddiePool_water_D.dds
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Ks kiddiePool_water_S.dds
+Ns 0.06

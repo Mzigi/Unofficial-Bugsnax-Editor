@@ -1,0 +1,18 @@
+newmtl initialShadingGroup1
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd overworldatlas_D.dds
+Ni 1.00
+newmtl material_0
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd TempOverworldlow_D.dds
+bump TempOverworldlow_N.dds -bm 1
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Ks TempOverworldlow_S.dds
+Ns 0.00

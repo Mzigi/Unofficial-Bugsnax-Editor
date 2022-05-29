@@ -64,9 +64,15 @@ let keysPressed = {
     "KeyS": false,
     "KeyA": false,
     "KeyD": false,
+    "KeyE": false,
+    "KeyQ": false,
     "ControlLeft": false,
     "ControlRight": false,
-    "ShiftLeft": false
+    "ShiftLeft": false,
+    "ArrowUp": false,
+    "ArrowDown": false,
+    "ArrowLeft": false,
+    "ArrowRight": false
 }
 
 window.addEventListener('keydown', function (e) {
@@ -79,6 +85,29 @@ window.addEventListener('keyup', function (e) {
     keysPressed[e.code] = false
   }
 })
+
+//ThreeJs Stuff
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera( 75, 800 / 600, 0.1, 1000 );
+
+const renderer = new THREE.WebGLRenderer();
+renderer.setSize( 800, 600 );
+document.body.appendChild( renderer.domElement );
+
+manager = new THREE.LoadingManager();
+var onProgress = function (xhr) {
+    if (xhr.lengthComputable) {
+        var percentComplete = xhr.loaded / xhr.total * 100;
+        console.log(Math.round(percentComplete, 2) + '% downloaded');
+    }
+};
+var onError = function (xhr) {
+};
+
+Texloader = new THREE.TextureLoader();
+
+var loader = new THREE.XLoader(manager, Texloader);
 
 //functions for many uses
 function download(filename, text) {
@@ -203,13 +232,14 @@ function refreshAttributes() {
           }
         } else if (keyType === "color") {
           input.setAttribute("type", "color")
+          input.setAttribute("placeholder", "#32ff4f00 (hex with alpha)")
 
-          alpha = document.createElement("input")
+          /*alpha = document.createElement("input")
           alpha.setAttribute("type","number")
           alpha.setAttribute("min","0")
           alpha.setAttribute("max","255")
           alpha.setAttribute("step","1")
-          alpha.setAttribute("placeholder", "alpha")
+          alpha.setAttribute("placeholder", "alpha")*/
         } else if (keyType === "float") {
           input.setAttribute("type", "number")
           input.setAttribute("step", "0.000000001")
@@ -237,20 +267,67 @@ function refreshAttributes() {
         }
 
         if (selectedNodeElement.querySelector(":scope > attributes")) {
-          if (selectedNodeElement.querySelector(keyType + '[name="' + key + '"]')) {
-            console.log("success! " + keyType + '[name="' + key + '"]')
-            if (keyType !== "enum" && keyType !== "color" && keyType !== "colorf") {
-              console.log("final")
-              input.setAttribute("value",selectedNodeElement.querySelector(keyType + '[name="' + key + '"]').getAttribute("value"))
-            } else if (keyType === "enum") {
-              input.value = selectedNodeElement.querySelector(keyType + '[name="' + key + '"]').getAttribute("value")
-            } else if (keyType === "color") {
-              console.log("AAAAAAAAAAAAAAAA: " + selectedNodeElement.querySelector(keyType + '[name="' + key + '"]').getAttribute("value").slice(0,7))
-              input.setAttribute("value",selectedNodeElement.querySelector(keyType + '[name="' + key + '"]').getAttribute("value").slice(0,7))
-              console.log("ALPHA IS " + selectedNodeElement.querySelector(keyType + '[name="' + key + '"]').getAttribute("value").slice(7,9))
-              alpha.setAttribute("value",parseInt(selectedNodeElement.querySelector(keyType + '[name="' + key + '"]').getAttribute("value").slice(7,9),16))
-            } else if (keyType === "colorf") {
-              var color = selectedNodeElement.querySelector(keyType + '[name="' + key + '"]').getAttribute("value").split(",")
+          /*if (selectedNodeElement.querySelector(":scope > attributes").querySelector(keyType + '[name="' + key + '"]') === null) {
+            let newThing = document.createElement(keyType)
+            newThing.setAttribute("name",key)
+            selectedNodeElement.querySelector(":scope > attributes").appendChild(newThing)
+          }*/
+
+          console.log("success! " + keyType + '[name="' + key + '"]')
+          if (keyType !== "enum" && keyType !== "colorf" && keyType !== "bool") {
+            console.log("final")
+            if (selectedNodeElement.querySelector(":scope > attributes").querySelector(keyType + '[name="' + key + '"]')) {
+              input.setAttribute("value",selectedNodeElement.querySelector(":scope > attributes").querySelector(keyType + '[name="' + key + '"]').getAttribute("value"))
+            }
+
+            input.addEventListener("change", () => {
+              if (selectedNodeElement.querySelector(":scope > attributes").querySelector(keyType + '[name="' + key + '"]') === null) {
+                console.log("lol!")
+                let newThing = document.createElement(keyType)
+                newThing.setAttribute("name",key)
+                selectedNodeElement.querySelector(":scope > attributes").appendChild(newThing)
+              }
+              if (selectedNodeElement.querySelector(":scope > attributes").querySelector(keyType + '[name="' + key + '"]') !== null) {
+                console.log("changed value!")
+                selectedNodeElement.querySelector(":scope > attributes").querySelector(keyType + '[name="' + key + '"]').setAttribute("value",input.value)
+              }
+            })
+            
+          } else if (keyType === "enum") {
+            if (selectedNodeElement.querySelector(":scope > attributes").querySelector(keyType + '[name="' + key + '"]')) {
+              input.value = selectedNodeElement.querySelector(":scope > attributes").querySelector(keyType + '[name="' + key + '"]').getAttribute("value")
+            }
+            input.addEventListener("change", () => {
+              if (selectedNodeElement.querySelector(":scope > attributes").querySelector(keyType + '[name="' + key + '"]') === null) {
+                let newThing = document.createElement(keyType)
+                newThing.setAttribute("name",key)
+                selectedNodeElement.querySelector(":scope > attributes").appendChild(newThing)
+              }
+              console.log("changed value!")
+              console.log(input.value)
+              selectedNodeElement.querySelector(":scope > attributes").querySelector(keyType + '[name="' + key + '"]').setAttribute("value",input.value)
+            })
+          } else if (keyType === "color") {
+            if (selectedNodeElement.querySelector(":scope > attributes").querySelector(keyType + '[name="' + key + '"]')) {
+              console.log("AAAAAAAAAAAAAAAA: " + selectedNodeElement.querySelector(":scope > attributes").querySelector(keyType + '[name="' + key + '"]').getAttribute("value").slice(0,7))
+              input.setAttribute("value",selectedNodeElement.querySelector(":scope > attributes").querySelector(keyType + '[name="' + key + '"]').getAttribute("value").slice(0,7))
+              console.log("ALPHA IS " + selectedNodeElement.querySelector(":scope > attributes").querySelector(keyType + '[name="' + key + '"]').getAttribute("value").slice(7,9))
+              alpha.setAttribute("value",parseInt(selectedNodeElement.querySelector(":scope > attributes").querySelector(keyType + '[name="' + key + '"]').getAttribute("value").slice(7,9),16))
+            }
+            input.addEventListener("change", () => {
+              if (selectedNodeElement.querySelector(":scope > attributes").querySelector(keyType + '[name="' + key + '"]') === null) {
+                let newThing = document.createElement(keyType)
+                newThing.setAttribute("name",key)
+                selectedNodeElement.querySelector(":scope > attributes").appendChild(newThing)
+              }
+              console.log(input.value)
+            })
+          } else if (keyType === "colorf") {
+            if (selectedNodeElement.querySelector(":scope > attributes").querySelector(keyType + '[name="' + key + '"]').getAttribute("value") !== null) {
+              selectedNodeElement.querySelector(":scope > attributes").querySelector(keyType + '[name="' + key + '"]').setAttribute("value","0.0, 0.0, 0.0, 0.0")
+            }
+            if (selectedNodeElement.querySelector(":scope > attributes").querySelector(keyType + '[name="' + key + '"]')) {
+              var color = selectedNodeElement.querySelector(":scope > attributes").querySelector(keyType + '[name="' + key + '"]').getAttribute("value").split(",")
               alphaColor = color[3]
               console.log(color)
               color = tinycolor({r:Math.floor(color[0] * 255),g:Math.floor(color[1] * 255),b:Math.floor(color[2] * 255),a:Math.floor(color[3] * 255)})
@@ -261,8 +338,73 @@ function refreshAttributes() {
               input.setAttribute("value",color.slice(0,7))
               alpha.setAttribute("value",parseInt(alphaColor * 255))
             }
-          } else {
-            console.log(keyType + '[name="' + key + '"]')
+            input.addEventListener("change", () => {
+              if (selectedNodeElement.querySelector(":scope > attributes").querySelector(keyType + '[name="' + key + '"]') === null) {
+                let newThing = document.createElement(keyType)
+                newThing.setAttribute("name",key)
+                selectedNodeElement.querySelector(":scope > attributes").appendChild(newThing)
+              }
+              console.log(input.value)
+              console.log(input.value)
+              let newColor = tinycolor(input.value)
+              console.log(newColor.toRgb())
+              let newColorString = ""
+              newColorString = newColorString + String(newColor.toRgb()["r"] / 255) + ","
+              newColorString = newColorString + String(newColor.toRgb()["g"] / 255) + ","
+              newColorString = newColorString + String(newColor.toRgb()["b"] / 255) + ","
+              newColorString = newColorString + String(alpha.value / 255)
+              console.log(newColorString)
+
+              selectedNodeElement.querySelector(":scope > attributes").querySelector(keyType + '[name="' + key + '"]').setAttribute("value",newColorString)
+            })
+
+            alpha.addEventListener("change", () => {
+              if (selectedNodeElement.querySelector(":scope > attributes").querySelector(keyType + '[name="' + key + '"]') === null) {
+                let newThing = document.createElement(keyType)
+                newThing.setAttribute("name",key)
+                selectedNodeElement.querySelector(":scope > attributes").appendChild(newThing)
+              }
+              console.log(input.value)
+              console.log(input.value)
+              let newColor = tinycolor(input.value)
+              console.log(newColor.toRgb())
+              let newColorString = ""
+              newColorString = newColorString + String(newColor.toRgb()["r"] / 255) + ","
+              newColorString = newColorString + String(newColor.toRgb()["g"] / 255) + ","
+              newColorString = newColorString + String(newColor.toRgb()["b"] / 255) + ","
+              newColorString = newColorString + String(alpha.value / 255)
+              console.log(newColorString)
+
+              selectedNodeElement.querySelector(":scope > attributes").querySelector(keyType + '[name="' + key + '"]').setAttribute("value",newColorString)
+            })
+          } else if (keyType === "bool") {
+            
+            console.log(selectedNodeElement.querySelector(keyType + '[name="' + key + '"]'))
+            if (selectedNodeElement.querySelector(":scope > attributes").querySelector(keyType + '[name="' + key + '"]') !== null) {
+              console.log("a\na\na\na\na\na\na\na")
+              console.log(selectedNodeElement.querySelector(keyType + '[name="' + key + '"]').getAttribute("value"))
+              if (selectedNodeElement.querySelector(":scope > attributes").querySelector(keyType + '[name="' + key + '"]').getAttribute("value") === "true") {
+                input.checked = true
+              } else {
+                input.checked = false
+              }
+            } else {
+              console.log(key + " has no value!")
+              input.checked = true
+            }
+
+            input.addEventListener("change", () => {
+              if (selectedNodeElement.querySelector(":scope > attributes").querySelector(keyType + '[name="' + key + '"]') === null) {
+                let newThing = document.createElement(keyType)
+                newThing.setAttribute("name",key)
+                selectedNodeElement.querySelector(":scope > attributes").appendChild(newThing)
+              }
+              if (input.checked === true) {
+                selectedNodeElement.querySelector(":scope > attributes").querySelector(keyType + '[name="' + key + '"]').setAttribute("value","true")
+              } else {
+                selectedNodeElement.querySelector(":scope > attributes").querySelector(keyType + '[name="' + key + '"]').setAttribute("value","false")
+              }
+            })
           }
         } else {
           console.log("HUH?")
@@ -414,6 +556,33 @@ function createVisualizedNode(xmlPath, elementParent2) {
     xmlPath = "0"
   }
 
+  //thre jss
+  if (xmlNode.querySelector(":scope > attributes").querySelector('vector3d[name="Position"]') !== null && xmlNode.querySelector(":scope > attributes").querySelector('vector3d[name="Scale"]') !== null) {
+    console.log("yes three js!!!!!!")
+    let splitScale = xmlNode.querySelector(":scope > attributes").querySelector('vector3d[name="Scale"]').getAttribute("value").split(",")
+    let splitPosition = xmlNode.querySelector(":scope > attributes").querySelector('vector3d[name="Position"]').getAttribute("value").split(",")
+    let geometry = new THREE.BoxGeometry(Number(splitScale[0]),Number(splitScale[1]),Number(splitScale[2]))
+    let material = new THREE.MeshBasicMaterial({color: 0xffffff})
+    if (xmlNode.querySelector(":scope > attributes").querySelector('path[name="MeshFileName"]') === null) {
+      let cube = new THREE.Mesh(geometry,material)
+      cube.position.x = Number(splitPosition[0])
+      cube.position.y = Number(splitPosition[1])
+      cube.position.z = Number(splitPosition[2])
+      scene.add(cube)
+    } else {
+      if (xmlNode.querySelector(":scope > attributes").querySelector('path[name="MeshFileName"]').getAttribute("value") !== "") {
+        loader.load([xmlNode.querySelector(":scope > attributes").querySelector('path[name="MeshFileName"]').getAttribute("value")], function (object) {
+          scene.add(object)
+        }, undefined, function ( error ) {
+
+          console.error( error );
+        
+        })
+      }
+    }
+  }
+
+  //back to normal stuff
   let li = document.createElement("li")
   li.setAttribute("data-internalid", xmlPath)
   li.setAttribute("draggable", "true")
@@ -916,7 +1085,7 @@ function fileMenuButtons() {
   }
 }
 
-document.body.addEventListener('click', function(e){   
+/*document.body.addEventListener('click', function(e){   
   if (!document.getElementById("SceneTree").contains(e.target)) {
     for (let i = 0; i < selectedLiElements.length; i++) {
       selectedLiElements[i].querySelector(":scope > span").classList.remove("selectedLi")
@@ -926,7 +1095,7 @@ document.body.addEventListener('click', function(e){
   if (!document.getElementById('dropdown-File').contains(e.target) && document.getElementById('dropdown-File').querySelector(".dropdown-content").classList.contains("dropdown-content-opened")){
     document.getElementById('dropdown-File').querySelector(".dropdown-content").classList.toggle("dropdown-content-opened");
   }
-});
+});*/
 
 function loadNewFile() {
   if (currentFileIndex < files.length) {
@@ -977,7 +1146,37 @@ updateSceneList()
 fileMenuButtons()
 
 function update() {
-  
+  renderer.render(scene,camera)
+  if (keysPressed["ArrowDown"] === true) {
+    camera.rotateX(-1 * Math.PI / 180)
+  }
+  if (keysPressed["ArrowUp"] === true) {
+    camera.rotateX(1 * Math.PI / 180)
+  }
+  if (keysPressed["ArrowLeft"] === true) {
+    camera.rotateY(1 * Math.PI / 180)
+  }
+  if (keysPressed["ArrowRight"] === true) {
+    camera.rotateY(-1 * Math.PI / 180)
+  }
+  if (keysPressed["KeyW"] === true) {
+    camera.translateZ(-1)
+  }
+  if (keysPressed["KeyS"] === true) {
+    camera.translateZ(1)
+  }
+  if (keysPressed["KeyA"] === true) {
+    camera.translateX(-1)
+  }
+  if (keysPressed["KeyD"] === true) {
+    camera.translateX(1)
+  }
+  if (keysPressed["KeyE"] === true) {
+    camera.translateY(1)
+  }
+  if (keysPressed["KeyQ"] === true) {
+    camera.translateY(-1)
+  }
 }
 createjs.Ticker.framerate = 60
 createjs.Ticker.addEventListener("tick", update)

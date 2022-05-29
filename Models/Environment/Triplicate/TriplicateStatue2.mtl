@@ -1,0 +1,11 @@
+newmtl TriplicateStatue_blinn1SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd TriplicateStatue2_D.dds
+bump  -bm 1 TriplicateStatue2_N.dds
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Ks TriplicateStatue2_S.dds
+Ns 0.06

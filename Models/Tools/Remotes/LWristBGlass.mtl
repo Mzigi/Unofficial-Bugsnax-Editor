@@ -1,0 +1,46 @@
+newmtl blinn3SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd LWatchB_D.dds
+bump LWatchB_N.dds -bm -1.37037
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Ks LWatchB_S.dds
+newmtl blinn4SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd LWatchA_D.dds
+bump LWatchA_N.dds -bm 1
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Ks LWatchA_S.dds
+newmtl blinn6SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd LWatchB_D.dds
+bump LWatchB_N.dds -bm 1
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Ks LWatchB_S.dds
+newmtl blinn7SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd LWatchB_D.dds
+bump LWatchB_N.dds -bm 1
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Ks LWatchB_S.dds
+newmtl lambert2SG
+illum 4
+Kd 0.50 0.50 0.50
+Ka 0.00 0.00 0.00
+Tf 0.40 0.40 0.40
+Ni 1.00

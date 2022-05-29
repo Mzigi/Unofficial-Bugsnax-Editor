@@ -1,0 +1,47 @@
+newmtl MetalFlowers:initialShadingGroup
+illum 4
+Kd 0.50 0.50 0.50
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl Tulips:initialShadingGroup
+illum 4
+Kd 0.50 0.50 0.50
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl blinn1SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd DesertGrassQuad_D.dds
+bump  -bm 1 DesertGrassQuad_N.dds
+Ni 1.00
+Ks 0.50 0.50 0.50
+newmtl blinn2SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Matilija_D.dds
+bump  -bm 1 Matilija_N.dds
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Ks Matilija_S.dds
+newmtl blinn3SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Oleander_D.dds
+bump  -bm 1 Oleander_N.dds
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Ks Oleander_S.dds
+newmtl initialShadingGroup
+illum 4
+Kd 0.50 0.50 0.50
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00

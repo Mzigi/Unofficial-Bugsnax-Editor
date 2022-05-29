@@ -1,0 +1,19 @@
+newmtl blinn2SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd medicineCabinetGlass_D.dds
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Ks medicineCabinetGlass_S.dds
+newmtl pasted__medicineCabinetMatSG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd medicineCabinet_D.dds
+bump  -bm 0.1 medicineCabinet_N.dds
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Ks medicineCabinet_S.dds

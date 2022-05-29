@@ -1,0 +1,10 @@
+newmtl blinn3SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Cover_D.dds
+bump  -bm 0.301205 Cover_N.dds
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Ks Cover_S.dds

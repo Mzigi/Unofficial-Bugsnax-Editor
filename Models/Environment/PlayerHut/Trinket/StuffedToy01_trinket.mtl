@@ -1,0 +1,10 @@
+newmtl blinn1SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd StuffedToy01_trinket_D.dds
+bump  -bm 1 StuffedToy01_trinket_N.dds
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Ks StuffedToy01_trinket_S.dds

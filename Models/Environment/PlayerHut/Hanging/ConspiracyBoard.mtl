@@ -1,0 +1,22 @@
+newmtl ConspiracyBoardTogether:blinn1SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd conspiracyBoard_D.dds
+bump  -bm 1 conspiracyBoard_N.dds
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Ks conspiracyBoard_S.dds
+Ns 0.06
+newmtl ConspiracyBoardTogether:blinn2SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd conspiracyBoardPapers_D.dds
+bump  -bm 1 conspiracyBoardPapers_N.dds
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Ks conspiracyBoardPapers_S.dds
+Ns 0.06

@@ -1,0 +1,31 @@
+newmtl delete:blinn1SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Chocolate_D.dds
+bump  -bm 1 Chocolate_N.dds
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Ks Chocolate_S.dds
+Ns 0.06
+newmtl initialShadingGroup
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl lambert12SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Ks FilboLimbs_S.dds
+newmtl lambert16SG
+illum 4
+Kd 1.00 1.00 1.00
+Ka 0.00 0.00 0.00
+Tf 0.14 0.14 0.14
+Ni 1.00

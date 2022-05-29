@@ -1,0 +1,22 @@
+newmtl Path_initialShadingGroup
+illum 4
+Kd 0.50 0.50 0.50
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl fp_s
+illum 4
+Kd 0.00 0.48 0.72
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.00 0.15 0.23
+Ns 12.13
+newmtl fp_t
+illum 4
+Kd 0.00 0.48 0.72
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.00 0.15 0.23
+Ns 12.13

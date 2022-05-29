@@ -1,0 +1,20 @@
+newmtl blinn1SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd BugSpecimens01_D.dds
+bump BugSpecimens01_N.dds -bm 1
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Ks BugSpecimens01_S.dds
+newmtl blinn5SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Grape_D.dds
+bump Grape_N.dds -bm 1
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Ks Grape_S.dds

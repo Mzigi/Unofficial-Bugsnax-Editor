@@ -1,0 +1,16 @@
+newmtl blinn3SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd growLightNursery_D.dds
+bump -bm 1 growLightNursery_N.dds
+Ni 1.00
+map_Ks growLightNursery_S.dds
+newmtl lambert3SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd PottedPlants02_D.dds
+Ni 1.00

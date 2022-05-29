@@ -1,0 +1,77 @@
+newmtl Barn_DoorLeft_Barn_DoorLeft_blinn1SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Barn_part01_paint_D.dds
+bump  -bm 1 Barn_part01_N.dds
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Ks Barn_part01_paint_S.dds
+Ns 0.06
+newmtl Barn_DoorRight_Barn_DoorRight_blinn1SG2
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Barn_part01_paint_D.dds
+bump  -bm 1 Barn_part01_N.dds
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Ks Barn_part01_paint_S.dds
+Ns 0.06
+newmtl Barn_DoorSide_blinn1SG2
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Barn_part02_D.dds
+bump  -bm 1 Barn_part02_N.dds
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Ks Barn_part02_S.dds
+Ns 0.06
+newmtl Barn_part01_blinn2SG2
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Barn_part01_paint_D.dds
+bump  -bm 1 Barn_part01_N.dds
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Ks Barn_part01_paint_S.dds
+Ns 0.06
+newmtl Barn_part02_Barn_part02_blinn1SG2
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Barn_part02_D.dds
+bump  -bm 1 Barn_part02_N.dds
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Ks Barn_part02_S.dds
+Ns 0.06
+newmtl Padlock_Padlock_blinn1SG2
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Barn_part02_D.dds
+bump  -bm 1 Barn_part02_N.dds
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Ks Barn_part02_S.dds
+Ns 0.06
+newmtl Padlock_broken_blinn1SG2
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Barn_part02_D.dds
+bump  -bm 1 Barn_part02_N.dds
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Ks Barn_part02_S.dds
+Ns 0.06

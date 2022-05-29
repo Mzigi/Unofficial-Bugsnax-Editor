@@ -1,0 +1,22 @@
+newmtl TestTubeLight:blinn13SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd TestTubeLightGlass_D.dds
+bump  -bm 1 TestTubeLightGlass_N.dds
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Ks TestTubeLightGlass_S.dds
+Ns 0.06
+newmtl TestTubeLight:blinn14SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd TestTubeLight_D.dds
+bump  -bm 1 TestTubeLight_N.dds
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Ks TestTubeLight_S.dds
+Ns 0.06

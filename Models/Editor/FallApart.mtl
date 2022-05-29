@@ -1,0 +1,50 @@
+newmtl RedShader3SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd OrangeShader.dds
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 0.06
+newmtl UpholsteryTextureSG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 0.06
+newmtl blinn5SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd BlackShader.dds
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 0.06
+newmtl blinn6SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd RedShader.dds
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 0.06
+newmtl blinn16SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd CushionTexture.dds
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 0.06
+newmtl initialShadingGroup
+illum 4
+Kd 0.50 0.50 0.50
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00

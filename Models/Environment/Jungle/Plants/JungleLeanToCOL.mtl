@@ -1,0 +1,79 @@
+newmtl Fern02_phong1SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Fern01_D.dds
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Ks Fern01_S.dds
+Ns 18.00
+newmtl Kelp01_blinn2SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd kelp_D.dds
+bump  -bm 1 kelp_N.dds
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Ks kelp_S.dds
+Ns 0.06
+newmtl LeanTo_blinn1SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd DesertLeanTo_D.dds
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Ks DesertLeanTo_S.dds
+Ns 0.06
+newmtl MonsteraPlant_blinn1SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd MonsteraPlant_D.dds
+bump  -bm 1 MonsteraPlant_N.dds
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Ks MonsteraPlant_S.dds
+Ns 0.06
+newmtl blinn1SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Fern_D.dds
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Ks Fern_S.dds
+Ns 0.06
+newmtl blinn2SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd JungleLeanTo_D.dds
+bump  -bm 1 JungleFern_N.dds
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Ks JungleFern_S.dds
+newmtl initialShadingGroup
+illum 4
+Kd 0.50 0.50 0.50
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl phong1SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd JungleLeanTo_D.dds
+bump  -bm 1 JungleLeanTo_N.dds
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Ks JungleLeanTo_S.dds
+Ns 18.00

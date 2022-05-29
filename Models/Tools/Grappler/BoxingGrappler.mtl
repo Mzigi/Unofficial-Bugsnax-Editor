@@ -1,0 +1,22 @@
+newmtl BoxingGlove_blinn6SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Grappler_D.dds
+bump  -bm 1 Grappler_N.dds
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Ks Grappler_S.dds
+Ns 0.06
+newmtl BoxingGlove_blinn7SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd BoxingGlove_D.dds
+bump  -bm 1 BoxingGlove_N.dds
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Ks BoxingGlove_S.dds
+Ns 0.06

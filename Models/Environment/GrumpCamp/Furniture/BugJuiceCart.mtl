@@ -1,0 +1,40 @@
+newmtl BugJuice01_blinn1SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd BugJuice01_D.dds
+bump BugJuice01_N.dds -bm 1
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Ks BugJuice01_S.dds
+newmtl Cart_blinn1SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd CromdoStorefront_D.dds
+bump CromdoStorefront_N.dds -bm 1
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Ks CromdoStorefront_S.dds
+newmtl Cup01_blinn1SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd BugJuice01_D.dds
+bump BugJuice01_N.dds -bm 1
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Ks BugJuice01_S.dds
+newmtl blinn2SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd BugJuice01_D.dds
+bump BugJuice01_N.dds -bm 1
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Ks BugJuice01_S.dds

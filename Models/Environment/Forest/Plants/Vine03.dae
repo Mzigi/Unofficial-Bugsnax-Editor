@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset>
+    <contributor>
+      <author/>
+      <authoring_tool>FBX COLLADA exporter</authoring_tool>
+      <comments/>
+    </contributor>
+    <created>2019-03-12T15:27:36Z</created>
+    <keywords/>
+    <modified>2019-03-12T15:27:36Z</modified>
+    <revision/>
+    <subject/>
+    <title/>
+    <unit meter="0.010000" name="centimeter"/>
+    <up_axis>Y_UP</up_axis>
+  </asset>
+  <library_images>
+    <image id="blinn1SG1F-image" name="blinn1SG1F">
+      <init_from>Vine01_D.dds</init_from>
+    </image>
+    <image id="blinn1SG1F1-image" name="blinn1SG1F1">
+      <init_from>Vine01_S.dds</init_from>
+    </image>
+  </library_images>
+  <library_materials>
+    <material id="blinn1SG1" name="blinn1SG1">
+      <instance_effect url="#blinn1SG1-fx"/>
+    </material>
+  </library_materials>
+  <library_effects>
+    <effect id="blinn1SG1-fx" name="blinn1SG1">
+      <profile_COMMON>
+        <technique sid="standard">
+          <phong>
+            <emission>
+              <color sid="emission">0.000000  0.000000 0.000000 1.000000</color>
+            </emission>
+            <ambient>
+              <color sid="ambient">0.000000  0.000000 0.000000 1.000000</color>
+            </ambient>
+            <diffuse>
+              <texture texture="blinn1SG1F-image" texcoord="CHANNEL0">
+                <extra>
+                  <technique profile="MAYA">
+                    <wrapU sid="wrapU0">TRUE</wrapU>
+                    <wrapV sid="wrapV0">TRUE</wrapV>
+                    <blend_mode>NONE</blend_mode>
+                  </technique>
+                </extra>
+              </texture>
+            </diffuse>
+            <specular>
+              <texture texture="blinn1SG1F1-image" texcoord="CHANNEL0">
+                <extra>
+                  <technique profile="MAYA">
+                    <wrapU sid="wrapU0">TRUE</wrapU>
+                    <wrapV sid="wrapV0">TRUE</wrapV>
+                    <blend_mode>NONE</blend_mode>
+                  </technique>
+                </extra>
+              </texture>
+            </specular>
+            <shininess>
+              <float sid="shininess">2.060000</float>
+            </shininess>
+            <reflective>
+              <color sid="reflective">0.000000  0.000000 0.000000 1.000000</color>
+            </reflective>
+            <reflectivity>
+              <float sid="reflectivity">0.500000</float>
+            </reflectivity>
+            <transparent opaque="RGB_ZERO">
+              <color sid="transparent">0.000000  0.000000 0.000000 1.000000</color>
+            </transparent>
+            <transparency>
+              <float sid="transparency">1.000000</float>
+            </transparency>
+          </phong>
+        </technique>
+      </profile_COMMON>
+    </effect>
+  </library_effects>
+  <library_geometries>
+    <geometry id="polySurface347-lib" name="polySurface347Mesh">
+      <mesh>
+        <source id="polySurface347-POSITION">
+          <float_array id="polySurface347-POSITION-array" count="81">
+1.553910 -5.926500 -0.725971
+0.754593 -6.056242 -0.148977
+0.524213 -4.646604 0.008762
+1.323531 -4.516861 -0.568232
+-0.192607 -6.250567 -0.380743
+-0.422986 -4.840929 -0.223004
+0.263390 -3.250261 0.000000
+1.062707 -3.120519 -0.576995
+-0.683810 -3.444585 -0.231766
+-1.134395 -4.645896 -0.775720
+-1.993243 -4.014201 -0.581558
+-1.120475 -2.762420 -0.229110
+-0.261627 -3.394116 -0.423272
+-2.637239 -3.462724 -1.256466
+-1.764471 -2.210943 -0.904018
+-0.203475 -1.527154 -0.055578
+0.655373 -2.158850 -0.249740
+-0.847471 -0.975677 -0.730486
+1.386740 -4.457419 -0.428486
+0.000000 -4.367587 0.197099
+0.000000 -2.165299 0.227339
+1.386740 -2.255131 -0.398245
+-1.386740 -4.457419 -0.428486
+-1.386740 -2.255131 -0.398245
+0.000000 0.000000 0.000000
+1.386740 -0.089832 -0.625585
+-1.386740 -0.089832 -0.625585
+</float_array>
+          <technique_common>
+            <accessor source="#polySurface347-POSITION-array" count="27" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="polySurface347-Normal0">
+          <float_array id="polySurface347-Normal0-array" count="216">
+0.206802 -0.075358 0.975476
+0.578297 0.056643 0.813858
+0.196753 -0.016040 0.980322
+0.578297 0.056643 0.813858
+0.206802 -0.075358 0.975476
+0.584778 0.004800 0.811179
+0.206802 -0.075358 0.975476
+-0.218971 -0.091291 0.971451
+-0.207630 -0.142231 0.967812
+-0.218971 -0.091291 0.971451
+0.206802 -0.075358 0.975476
+0.196753 -0.016040 0.980322
+0.196753 -0.016040 0.980322
+0.569682 0.111521 0.814264
+0.186428 0.040983 0.981613
+0.569682 0.111521 0.814264
+0.196753 -0.016040 0.980322
+0.578297 0.056643 0.813858
+0.196753 -0.016040 0.980322
+-0.230358 -0.036927 0.972405
+-0.218971 -0.091291 0.971451
+-0.230358 -0.036927 0.972405
+0.196753 -0.016040 0.980322
+0.186428 0.040983 0.981613
+0.043919 -0.238480 0.970154
+-0.329835 -0.035643 0.943366
+0.012049 -0.278775 0.960281
+-0.329835 -0.035643 0.943366
+0.043919 -0.238480 0.970154
+-0.295615 0.012642 0.955224
+-0.295615 0.012642 0.955224
+-0.613576 0.213772 0.760149
+-0.329835 -0.035643 0.943366
+-0.613576 0.213772 0.760149
+-0.295615 0.012642 0.955224
+-0.585543 0.257088 0.768795
+0.043919 -0.238480 0.970154
+0.077628 -0.194979 0.977731
+-0.261736 0.058970 0.963336
+0.043919 -0.238480 0.970154
+-0.261736 0.058970 0.963336
+-0.295615 0.012642 0.955224
+-0.261736 0.058970 0.963336
+-0.585543 0.257088 0.768795
+-0.295615 0.012642 0.955224
+-0.585543 0.257088 0.768795
+-0.261736 0.058970 0.963336
+-0.554023 0.302312 0.775671
+0.413024 0.039699 0.909854
+0.000000 -0.013730 0.999906
+0.410507 -0.012520 0.911772
+0.000000 -0.013730 0.999906
+0.413024 0.039699 0.909854
+0.000000 0.046620 0.998913
+-0.413024 0.039699 0.909854
+0.000000 -0.013730 0.999906
+0.000000 0.046620 0.998913
+0.000000 -0.013730 0.999906
+-0.413024 0.039699 0.909854
+-0.410507 -0.012520 0.911772
+0.414460 0.095028 0.905093
+0.000000 0.046620 0.998913
+0.413024 0.039699 0.909854
+0.000000 0.046620 0.998913
+0.414460 0.095028 0.905093
+0.000000 0.104418 0.994534
+-0.414460 0.095028 0.905093
+0.000000 0.046620 0.998913
+0.000000 0.104418 0.994534
+0.000000 0.046620 0.998913
+-0.414460 0.095028 0.905093
+-0.413024 0.039699 0.909854
+</float_array>
+          <technique_common>
+            <accessor source="#polySurface347-Normal0-array" count="72" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="polySurface347-UV0">
+          <float_array id="polySurface347-UV0-array" count="54">
+0.651372 0.268342
+0.830108 0.268295
+0.830108 0.607170
+0.658522 0.607170
+1.008845 0.268342
+1.001694 0.607170
+0.830108 0.946118
+0.660246 0.946050
+0.999971 0.946050
+1.008845 0.268342
+0.830108 0.268295
+0.830108 0.607170
+1.001694 0.607170
+0.651372 0.268342
+0.658522 0.607170
+0.830108 0.946118
+0.999971 0.946050
+0.660246 0.946050
+0.651372 0.268342
+0.830108 0.268295
+0.830108 0.607170
+0.658522 0.607170
+1.008845 0.268342
+1.001694 0.607170
+0.830108 0.946118
+0.660246 0.946050
+0.999971 0.946050
+</float_array>
+          <technique_common>
+            <accessor source="#polySurface347-UV0-array" count="27" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="polySurface347-VERTEX_COLOR0">
+          <float_array id="polySurface347-VERTEX_COLOR0-array" count="192">
+1.000000 0.200000 0.000000 1.000000
+1.000000 0.200000 0.000000 1.000000
+0.000000 0.200000 0.000000 1.000000
+1.000000 0.200000 0.000000 1.000000
+1.000000 0.200000 0.000000 1.000000
+0.000000 0.200000 0.000000 1.000000
+1.000000 0.200000 0.000000 1.000000
+1.000000 0.200000 0.000000 1.000000
+1.000000 0.200000 0.000000 1.000000
+1.000000 0.200000 0.000000 1.000000
+0.000000 0.200000 1.000000 1.000000
+0.000000 0.200000 0.000000 1.000000
+0.000000 0.200000 0.000000 1.000000
+0.000000 0.200000 1.000000 1.000000
+1.000000 0.200000 0.000000 1.000000
+1.000000 0.200000 0.000000 1.000000
+1.000000 0.500000 0.000000 1.000000
+1.000000 0.495245 0.000000 1.000000
+0.000000 0.500000 0.000000 1.000000
+1.000000 0.500000 0.000000 1.000000
+1.000000 0.500000 0.000000 1.000000
+0.000000 0.500000 0.000000 1.000000
+1.000000 0.500000 0.000000 1.000000
+1.000000 0.500000 0.000000 1.000000
+1.000000 0.495245 0.000000 1.000000
+1.000000 0.500000 0.000000 1.000000
+0.000000 0.500000 1.000000 1.000000
+0.000000 0.500000 0.000000 1.000000
+0.000000 0.500000 0.000000 1.000000
+0.000000 0.500000 1.000000 1.000000
+1.000000 0.500000 0.000000 1.000000
+1.000000 0.500000 0.000000 1.000000
+1.000000 1.000000 0.000000 1.000000
+1.000000 1.000000 0.000000 1.000000
+0.000000 1.000000 0.000000 1.000000
+1.000000 1.000000 0.000000 1.000000
+1.000000 1.000000 0.000000 1.000000
+0.000000 1.000000 0.000000 1.000000
+1.000000 1.000000 0.000000 1.000000
+1.000000 1.000000 0.000000 1.000000
+1.000000 1.000000 0.000000 1.000000
+1.000000 1.000000 0.000000 1.000000
+0.000000 1.000000 1.000000 1.000000
+0.000000 1.000000 0.000000 1.000000
+0.000000 1.000000 0.000000 1.000000
+0.000000 1.000000 1.000000 1.000000
+1.000000 1.000000 0.000000 1.000000
+1.000000 1.000000 0.000000 1.000000
+</float_array>
+          <technique_common>
+            <accessor source="#polySurface347-VERTEX_COLOR0-array" count="48" stride="4">
+              <param name="R" type="double"/>
+              <param name="G" type="double"/>
+              <param name="B" type="double"/>
+              <param name="A" type="double"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="polySurface347-VERTEX">
+          <input semantic="POSITION" source="#polySurface347-POSITION"/>
+        </vertices>
+        <triangles count="24" material="blinn1SG1">
+          <input semantic="VERTEX" offset="0" source="#polySurface347-VERTEX"/>
+          <input semantic="NORMAL" offset="1" source="#polySurface347-Normal0"/>
+          <input semantic="TEXCOORD" offset="2" set="0" source="#polySurface347-UV0"/>
+          <input semantic="COLOR" offset="3" set="0" source="#polySurface347-VERTEX_COLOR0"/>
+          <p> 1 0 1 3 3 1 3 1 2 2 2 2 3 3 3 1 1 4 1 3 0 5 0 0 1 6 1 4 5 7 5 6 4 8 4 7 5 9 5 6 1 10 1 4 2 11 2 5 2 12 2 11 7 13 7 9 6 14 6 10 7 15 7 9 2 16 2 11 3 17 3 8 2 18 2 12 8 19 8 14 5 20 5 15 8 21 8 14 2 22 2 12 6 23 6 13 12 24 12 17 10 25 10 19 9 26 9 16 10 27 10 19 12 28 12 17 11 29 11 18 11 30 11 21 13 31 13 23 10 32 10 20 13 33 13 23 11 34 11 21 14 35 14 22 12 36 12 24 16 37 16 25 15 38 15 26 12 39 12 24 15 40 15 26 11 41 11 27 15 42 15 29 14 43 14 31 11 44 11 28 14 45 14 31 15 46 15 29 17 47 17 30 21 48 21 33 19 49 19 35 18 50 18 32 19 51 19 35 21 52 21 33 20 53 20 34 23 54 23 38 19 55 19 36 20 56 20 37 19 57 19 36 23 58 23 38 22 59 22 39 25 60 25 41 20 61 20 43 21 62 21 40 20 63 20 43 25 64 25 41 24 65 24 42 26 66 26 46 20 67 20 44 24 68 24 45 20 69 20 44 26 70 26 46 23 71 23 47</p>
+        </triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_visual_scenes>
+    <visual_scene id="Vine03" name="Vine03">
+      <node name="polySurface347" id="polySurface347" sid="polySurface347">
+        <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+        <instance_geometry url="#polySurface347-lib">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="blinn1SG1" target="#blinn1SG1"/>
+            </technique_common>
+          </bind_material>
+        </instance_geometry>
+        <extra>
+          <technique profile="FCOLLADA">
+            <visibility>1.000000</visibility>
+          </technique>
+        </extra>
+      </node>
+      <extra>
+        <technique profile="MAX3D">
+          <frame_rate>24.000000</frame_rate>
+        </technique>
+        <technique profile="FCOLLADA">
+          <start_time>0.041667</start_time>
+          <end_time>8.333333</end_time>
+        </technique>
+      </extra>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#Vine03"/>
+  </scene>
+</COLLADA>

@@ -1,0 +1,10 @@
+newmtl blinn1SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd GardenTrellis_broken_D.dds
+bump GardenTrellis_broken_N.dds -bm 1
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Ks GardenTrellis_broken_S.dds

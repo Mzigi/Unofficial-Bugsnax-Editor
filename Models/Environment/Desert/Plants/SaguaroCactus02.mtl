@@ -1,0 +1,30 @@
+newmtl SaguaroCactus01:blinn3SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd SaguaroCactus01_D.dds
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Ks SaguaroCactus01_S.dds
+Ns 0.06
+newmtl SaguaroCactus02:blinn4SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd SaguaroCactus01_D.dds
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Ks SaguaroCactus01_S.dds
+Ns 0.06
+newmtl blinn2SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd SaguaroCactus01_D.dds
+bump SaguaroCactus01_N.dds -bm 1
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Ks SaguaroCactus01_S.dds
