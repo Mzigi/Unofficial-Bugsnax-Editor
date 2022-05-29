@@ -571,7 +571,7 @@ function createVisualizedNode(xmlPath, elementParent2) {
       scene.add(cube)
     } else {
       if (xmlNode.querySelector(":scope > attributes").querySelector('path[name="MeshFileName"]').getAttribute("value") !== "") {
-        loader.load(["https://mzigi.github.io/Unofficial-Bugsnax-Editor/" + xmlNode.querySelector(":scope > attributes").querySelector('path[name="MeshFileName"]').getAttribute("value")], function (object) {
+        loader.load(["https://raw.githubusercontent.com/Mzigi/Unofficial-Bugsnax-Editor/main/" + xmlNode.querySelector(":scope > attributes").querySelector('path[name="MeshFileName"]').getAttribute("value")], function (object) {
           scene.add(object)
         }, undefined, function ( error ) {
 
