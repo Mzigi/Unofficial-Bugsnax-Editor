@@ -7,6 +7,39 @@
     <link href="css/main.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
+    <script type="x-shader/x-vertex" id="vertexShader">
+
+			varying vec3 vWorldPosition;
+
+			void main() {
+
+				vec4 worldPosition = modelMatrix * vec4( position, 1.0 );
+				vWorldPosition = worldPosition.xyz;
+
+				gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+
+			}
+
+		</script>
+
+    <script type="x-shader/x-fragment" id="fragmentShader">
+
+			uniform vec3 topColor;
+			uniform vec3 bottomColor;
+			uniform float offset;
+			uniform float exponent;
+
+			varying vec3 vWorldPosition;
+
+			void main() {
+
+				float h = normalize( vWorldPosition + offset ).y;
+				gl_FragColor = vec4( mix( bottomColor, topColor, max( pow( max( h , 0.0), exponent ), 0.0 ) ), 1.0 );
+
+			}
+
+		</script>
+
     <div id="FileMenu">
       <div class="dropdown" id="dropdown-File"><button class="FileMenu" id="FileMenu-File">File</button>
         <div class="dropdown-content">
@@ -67,7 +100,10 @@
       </div>
     </div>
 
+
     <script src="libraries/three.min.js"></script>
+    <script src="libraries/obj-loader.js" type="module"></script>
+    <script src="libraries/collada-loader.js" type="module"></script>
     <script src="libraries/XLoader.js"></script>
     <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
     <script src="libraries/jquery-3.6.0.min.js"></script>

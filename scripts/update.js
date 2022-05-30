@@ -91,6 +91,9 @@ window.addEventListener('keyup', function (e) {
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera( 75, 800 / 600, 0.1, 1000 );
 
+scene.background = new THREE.Color().setHSL( 0.6, 0, 0);
+scene.fog = new THREE.Fog( scene.background, 1, 5000 );
+
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize( 800, 600 );
 document.body.appendChild( renderer.domElement );
@@ -107,7 +110,74 @@ var onError = function (xhr) {
 
 Texloader = new THREE.TextureLoader();
 
+var daeLoader = new THREE.ColladaLoader();
 var loader = new THREE.XLoader(manager, Texloader);
+var objLoader = new THREE.OBJLoader();
+
+renderer.outputEncoding = THREE.sRGBEncoding;
+renderer.shadowMap.enabled = true;
+
+// LIGHTS
+
+const hemiLight = new THREE.HemisphereLight( 0xffffff, 0xffffff, 0.6 );
+hemiLight.color.setHSL( 0.6, 1, 0.6 );
+hemiLight.groundColor.setHSL( 0.095, 1, 0.75 );
+hemiLight.position.set( 0, 50, 0 );
+scene.add( hemiLight );
+
+const hemiLightHelper = new THREE.HemisphereLightHelper( hemiLight, 10 );
+scene.add( hemiLightHelper );
+
+//
+
+const dirLight = new THREE.DirectionalLight( 0xffffff, 1 );
+dirLight.color.setHSL( 0.1, 1, 0.95 );
+dirLight.position.set( - 1, 1.75, 1 );
+dirLight.position.multiplyScalar( 30 );
+scene.add( dirLight );
+
+dirLight.castShadow = true;
+
+dirLight.shadow.mapSize.width = 2048;
+dirLight.shadow.mapSize.height = 2048;
+
+const d = 50;
+
+dirLight.shadow.camera.left = - d;
+dirLight.shadow.camera.right = d;
+dirLight.shadow.camera.top = d;
+dirLight.shadow.camera.bottom = - d;
+
+dirLight.shadow.camera.far = 3500;
+dirLight.shadow.bias = - 0.0001;
+
+const dirLightHelper = new THREE.DirectionalLightHelper( dirLight, 10 );
+scene.add( dirLightHelper );
+
+// SKYDOME
+
+const vertexShader = document.getElementById( 'vertexShader' ).textContent;
+const fragmentShader = document.getElementById( 'fragmentShader' ).textContent;
+const uniforms = {
+  'topColor': { value: new THREE.Color( 0x0077ff ) },
+  'bottomColor': { value: new THREE.Color( 0xffffff ) },
+  'offset': { value: 33 },
+  'exponent': { value: 0.6 }
+};
+uniforms[ 'topColor' ].value.copy( hemiLight.color );
+
+scene.fog.color.copy( uniforms[ 'bottomColor' ].value );
+
+const skyGeo = new THREE.SphereGeometry( 4000, 32, 15 );
+const skyMat = new THREE.ShaderMaterial( {
+  uniforms: uniforms,
+  vertexShader: vertexShader,
+  fragmentShader: fragmentShader,
+  side: THREE.BackSide
+} );
+
+const sky = new THREE.Mesh( skyGeo, skyMat );
+scene.add( sky );
 
 //functions for many uses
 function download(filename, text) {
@@ -557,13 +627,13 @@ function createVisualizedNode(xmlPath, elementParent2) {
   }
 
   //thre jss
-  if (xmlNode.querySelector(":scope > attributes").querySelector('vector3d[name="Position"]') !== null && xmlNode.querySelector(":scope > attributes").querySelector('vector3d[name="Scale"]') !== null) {
+  if (xmlNode.querySelector(":scope > attributes").querySelector('vector3d[name="Position"]') !== null && xmlNode.querySelector(":scope > attributes").querySelector('vector3d[name="Scale"]') !== null ) {
     console.log("yes three js!!!!!!")
     let splitScale = xmlNode.querySelector(":scope > attributes").querySelector('vector3d[name="Scale"]').getAttribute("value").split(",")
     let splitPosition = xmlNode.querySelector(":scope > attributes").querySelector('vector3d[name="Position"]').getAttribute("value").split(",")
     let geometry = new THREE.BoxGeometry(Number(splitScale[0]),Number(splitScale[1]),Number(splitScale[2]))
     let material = new THREE.MeshBasicMaterial({color: 0xffffff})
-    if (xmlNode.querySelector(":scope > attributes").querySelector('path[name="MeshFileName"]') === null) {
+    if (xmlNode.querySelector(":scope > attributes").querySelector('path[name="MeshFileName"]') === null || xmlNode.querySelector(":scope > attributes").querySelector('path[name="MeshFileName"]').getAttribute("value").endsWith(".x") === false && xmlNode.querySelector(":scope > attributes").querySelector('path[name="MeshFileName"]').getAttribute("value").endsWith(".dae") === false && xmlNode.querySelector(":scope > attributes").querySelector('path[name="MeshFileName"]').getAttribute("value").endsWith(".obj") === false) {
       let cube = new THREE.Mesh(geometry,material)
       cube.position.x = Number(splitPosition[0])
       cube.position.y = Number(splitPosition[1])
@@ -571,27 +641,44 @@ function createVisualizedNode(xmlPath, elementParent2) {
       scene.add(cube)
     } else {
       if (xmlNode.querySelector(":scope > attributes").querySelector('path[name="MeshFileName"]').getAttribute("value") !== "") {
-        loader.load(["https://raw.githubusercontent.com/Mzigi/Unofficial-Bugsnax-Editor/main/" + xmlNode.querySelector(":scope > attributes").querySelector('path[name="MeshFileName"]').getAttribute("value")], function (object) {
+        /*loader.load(["https://raw.githubusercontent.com/Mzigi/Unofficial-Bugsnax-Editor/main/" + xmlNode.querySelector(":scope > attributes").querySelector('path[name="MeshFileName"]').getAttribute("value")], function (object) {
           scene.add(object)
         }, undefined, function ( error ) {
 
           console.error( error );
         
-        })
+        })*/
 
-        var Models = [];
+        if (xmlNode.querySelector(":scope > attributes").querySelector('path[name="MeshFileName"]').getAttribute("value").endsWith(".x") === true) {
+          var Models = [];
 
-        console.log("https://raw.githubusercontent.com/Mzigi/Unofficial-Bugsnax-Editor/main/" + xmlNode.querySelector(":scope > attributes").querySelector('path[name="MeshFileName"]').getAttribute("value"))
-        loader.load(["https://raw.githubusercontent.com/Mzigi/Unofficial-Bugsnax-Editor/main/" + xmlNode.querySelector(":scope > attributes").querySelector('path[name="MeshFileName"]').getAttribute("value")], function (object) {
-            for (var i = 0; i < object.models.length; i++) {
-                    Models.push(object.models[i]);    
-                    scene.add(Models[i]);
-                    Models[i].position.x = Number(splitPosition[0])
-                    Models[i].position.y = Number(splitPosition[1])
-                    Models[i].position.z = Number(splitPosition[2])
-            }
-            object = null;
-        }, onProgress, onError);
+          console.log("https://raw.githubusercontent.com/Mzigi/Unofficial-Bugsnax-Editor/main/" + xmlNode.querySelector(":scope > attributes").querySelector('path[name="MeshFileName"]').getAttribute("value"))
+          loader.load(["https://raw.githubusercontent.com/Mzigi/Unofficial-Bugsnax-Editor/main/" + xmlNode.querySelector(":scope > attributes").querySelector('path[name="MeshFileName"]').getAttribute("value")], function (object) {
+              for (var i = 0; i < object.models.length; i++) {
+                      Models.push(object.models[i]);    
+                      scene.add(Models[i]);
+                      Models[i].position.x = Number(splitPosition[0])
+                      Models[i].position.y = Number(splitPosition[1])
+                      Models[i].position.z = Number(splitPosition[2])
+              }
+              object = null;
+          }, onProgress, onError);
+
+        } else if (xmlNode.querySelector(":scope > attributes").querySelector('path[name="MeshFileName"]').getAttribute("value").endsWith(".dae") === true) {
+          daeLoader.load("https://raw.githubusercontent.com/Mzigi/Unofficial-Bugsnax-Editor/main/" + xmlNode.querySelector(":scope > attributes").querySelector('path[name="MeshFileName"]').getAttribute("value"), function (result) {
+            scene.add(result.scene);
+            result.position.x = Number(splitPosition[0])
+            result.position.y = Number(splitPosition[1])
+            result.position.z = Number(splitPosition[2])
+          });
+        } else if (xmlNode.querySelector(":scope > attributes").querySelector('path[name="MeshFileName"]').getAttribute("value").endsWith(".obj") === true) {
+          objLoader.load("https://raw.githubusercontent.com/Mzigi/Unofficial-Bugsnax-Editor/main/" + xmlNode.querySelector(":scope > attributes").querySelector('path[name="MeshFileName"]').getAttribute("value"), function (result) {
+            scene.add(result.scene);
+            result.position.x = Number(splitPosition[0])
+            result.position.y = Number(splitPosition[1])
+            result.position.z = Number(splitPosition[2])
+          })
+        }
       }
     }
   }
@@ -1168,10 +1255,10 @@ function update() {
     camera.rotateX(1 * Math.PI / 180)
   }
   if (keysPressed["ArrowLeft"] === true) {
-    camera.rotateY(1 * Math.PI / 180)
+    camera.rotation.y = camera.rotation.y + 1 * Math.PI / 180
   }
   if (keysPressed["ArrowRight"] === true) {
-    camera.rotateY(-1 * Math.PI / 180)
+    camera.rotation.y = camera.rotation.y - 1 * Math.PI / 180
   }
   if (keysPressed["KeyW"] === true) {
     camera.translateZ(-1)
