@@ -110,7 +110,7 @@ var onError = function (xhr) {
 
 Texloader = new THREE.TextureLoader();
 
-var daeLoader = new THREE.ColladaLoader();
+//var daeLoader = new THREE.ColladaLoader();
 var loader = new THREE.XLoader(manager, Texloader);
 var objLoader = new THREE.OBJLoader();
 
@@ -666,10 +666,10 @@ function createVisualizedNode(xmlPath, elementParent2) {
 
         } else if (xmlNode.querySelector(":scope > attributes").querySelector('path[name="MeshFileName"]').getAttribute("value").endsWith(".dae") === true) {
           daeLoader.load("https://raw.githubusercontent.com/Mzigi/Unofficial-Bugsnax-Editor/main/" + xmlNode.querySelector(":scope > attributes").querySelector('path[name="MeshFileName"]').getAttribute("value"), function (result) {
-            scene.add(result.scene);
+            /*scene.add(result.scene);
             result.position.x = Number(splitPosition[0])
             result.position.y = Number(splitPosition[1])
-            result.position.z = Number(splitPosition[2])
+            result.position.z = Number(splitPosition[2])*/
           });
         } else if (xmlNode.querySelector(":scope > attributes").querySelector('path[name="MeshFileName"]').getAttribute("value").endsWith(".obj") === true) {
           objLoader.load("https://raw.githubusercontent.com/Mzigi/Unofficial-Bugsnax-Editor/main/" + xmlNode.querySelector(":scope > attributes").querySelector('path[name="MeshFileName"]').getAttribute("value"), function (result) {
