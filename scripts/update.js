@@ -653,7 +653,7 @@ function createVisualizedNode(xmlPath, elementParent2) {
           var Models = [];
 
           console.log("https://raw.githubusercontent.com/Mzigi/Unofficial-Bugsnax-Editor/main/" + xmlNode.querySelector(":scope > attributes").querySelector('path[name="MeshFileName"]').getAttribute("value"))
-          loader.load(["https://raw.githubusercontent.com/Mzigi/Unofficial-Bugsnax-Editor/main/" + xmlNode.querySelector(":scope > attributes").querySelector('path[name="MeshFileName"]').getAttribute("value")], function (object) {
+          loader.load(["https://raw.githubusercontent.com/adrs2002/threeXfileLoader/master/sample/content/SSR06_model.x"], function (object) {
               for (var i = 0; i < object.models.length; i++) {
                       Models.push(object.models[i]);    
                       scene.add(Models[i]);
