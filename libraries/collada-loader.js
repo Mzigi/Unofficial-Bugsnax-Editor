@@ -1,5 +1,5 @@
 ( function () {
-
+//t
 	class ColladaLoader extends THREE.Loader {
 
 		constructor( manager ) {
